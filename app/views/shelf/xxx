@@ -1,0 +1,7 @@
+    <% entrylist.each { |entry| %>
+      <% @entry = entry %>
+      <div style='float:left;margin:0px;height:138;width:96'>
+        <div style='padding:0px;margin:0pt;height:8'><%= image_tag "/images/fms.gif", :class => "fms" %></div>
+        <%= @entry %>
+      </div>
+    <% } %>

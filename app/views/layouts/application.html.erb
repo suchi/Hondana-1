@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!--
+  これがアプリケーションの共通トップHTMLになるのか?
+-->
+<html>
+  <head>
+    <title>本棚.org</title>
+    <%= csrf_meta_tags %>
+
+    <!--
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    -->
+    <%= stylesheet_link_tag "bookshelf" %>
+    <!--
+    javascript_include_tag "cookiejump"
+    -->
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<div id="hondana_org">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td align="left">
+        <!-- '/' だとサイトのトップに飛んでしまうのがマズい -->
+	<%= link_to image_tag("/images/fms.gif", :alt => "hondana.org", :id => "link_home"), url_for(:controller => 'bookshelf', :action => 'list') %>
+      </td>
+      <td align="right">
+        <br/>
+        <%= form_tag ({:controller => 'bookshelf', :action => 'search'}) do %>
+        本を探す  <%= text_field_tag 'q' %> <%= submit_tag '本棚.orgで検索' %>
+        <% end %>
+      </td>
+      <td>
+        <br/>
+        <form method="GET" action="http://www.amazon.co.jp/exec/obidos/external-search/">
+	  <input type="text" name="keyword" size="16" value="">
+          <input type="hidden" name="tag" value="bookshelf-1-22">
+          <input type="hidden" name="encoding-string-jp" value="日本語">
+          <input type=submit value="Amazonで検索">
+        </form>
+      </td>
+      <td valign="top">
+        <br/>
+	<%= link_to "本棚Wiki", "http://Gyazz.com/本棚/" %>
+      </td>
+    </tr>
+  </table>
+</div>
