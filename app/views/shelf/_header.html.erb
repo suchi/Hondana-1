@@ -1,4 +1,28 @@
 <%= render 'shared/header' %>
 
-ここに 本棚「<%= params['shelfname'] %>」の情報を表示
+<div id='edit'>
+  <%= link_to '書籍追加', :action => 'newbooks' %> |
+  <%= link_to '本棚情報変更', :action => 'profile_edit' %> |
+  <%= link_to '名前変更/本棚削除', :action => 'rename' %> |
+  <%= link_to '類似本棚', :action => 'similar' %> |
+  <%= link_to 'ヘルプ', :action => 'help' %>
+</div>
+
+<div id="header">
+  <h1>
+    <% name = shelf.nil? ? '' : shelf.name %>
+    <% if shelf.url.to_s != '' then %>
+      <%= link_to name, shelf.url %>の本棚
+    <% else %>
+      <%= name %>の本棚
+    <% end %>
+  </h1>
+  <p class="description"><%= expand_tag shelf.description, shelf.name %><p>
+  </p>
+</div>
+
+<div id='menu_top'>
+  <%= render 'listmenu', entries: entries %>
+</div>
+<br clear='all'>
 

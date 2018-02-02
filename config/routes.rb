@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   #
   # 本棚表示
   #

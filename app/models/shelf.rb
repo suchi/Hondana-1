@@ -9,11 +9,13 @@ class Shelf < ApplicationRecord
 #  end
 
   def countbook
-    return Entry.count(:conditions => ["shelf_id = #{id}"])
+    Entry.where(:shelf_id => id).size
   end
 
-  def countbook_comm
-    return Entry.count(:conditions => ["LENGTH(comment) > 0 AND shelf_id = #{id}"])
+  def countbook_comment
+    Entry.where(:shelf_id => id).find_all { |entry|
+      entry.comment.length > 0
+    }.length
   end
 
 end

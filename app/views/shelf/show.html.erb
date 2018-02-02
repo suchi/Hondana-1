@@ -5,7 +5,9 @@
     実際にはこれは使わない
   -->
 
-<%= render 'header' %>
+<% shelf = Shelf.where(name: shelfname)[0] %>
+
+<%= render 'header', shelf: shelf %>
 
 <div id="shelf_v">
   <div id="shelf">
@@ -17,7 +19,6 @@
 	 これを where() に変えるらしい
       -->
     <% shelfname = params['shelfname'] %>
-    <% shelf = Shelf.where(name: shelfname)[0] %>
     <!-- partialなrender, locals経由のデータ渡し -->
     <%= render 'imagelist', entries: shelf.entries %>
   </div>

@@ -8,16 +8,22 @@
     <%= csrf_meta_tags %>
 
     <!--
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     -->
-    <%= stylesheet_link_tag "bookshelf" %>
-    <!--
+
+    <!--  stylesheet_link_tag "bookshelf" %> -->
+
+      <!--
     javascript_include_tag "cookiejump"
-    -->
+	-->
+      <link href="/stylesheets/bookshelf.css" media="screen" rel="stylesheet" type="text/css" />
+      
   </head>
 
-  <body>
-    <%= yield %>
+  <body topmargin='0' marginwidth='0' marginheight='0' leftmargin='0'>
+    <div id="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

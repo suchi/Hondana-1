@@ -10,8 +10,8 @@
   <% else %>
     <% showdot = entry.comment.to_s != '' ? 'dotted' : 'none' %>
     <div class='book_shade' style='border-left:2px <%= showdot %> #333333'>
-      <%= link_to image_tag(imageurl, :class => "book_image", :alt => book.title),
-        :controller => 'shelf', :shelfname => shelf.name, :isbn => book.isbn, :action => 'edit' %>
+      <!-- link_to image_tag(imageurl, :class => "book_image", :alt => book.title),:controller => 'shelf', :shelfname => shelf.name, :isbn => book.isbn, :action => 'edit' %> -->
+      <%= image_tag(imageurl, :class => "book_image") %>
     </div>
   <% end %>
 </div>
