@@ -1,9 +1,9 @@
 <!--
     本棚の書籍リスト
     from app/views/shelf/show.rhtml
-  -->
 
-<% shelfname = params['shelf'] %>
+    実際にはこれは使わない
+  -->
 
 <%= render 'header' %>
 
@@ -16,9 +16,10 @@
 	 Shelf.find(:first, :conditions => ["name = ?", shelfname])
 	 これを where() に変えるらしい
       -->
+    <% shelfname = params['shelfname'] %>
     <% shelf = Shelf.where(name: shelfname)[0] %>
-    <% @entrylist = shelf.entries %>
-    <%= render 'imagelist' %>
+    <!-- partialなrender, locals経由のデータ渡し -->
+    <%= render 'imagelist', entries: shelf.entries %>
   </div>
 </div>
 <div id="shelf_shade"></div>
