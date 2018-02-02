@@ -7,12 +7,12 @@
       <%= "|" if entries %>
     </td>
     <td>
-      <%= link_to '更新順', :action => 'show_recent_detail' %> -
-      <%= link_to '表紙', :list => 'image', :sort => 'recent' %> -
-      <%= link_to '書名', :list => 'text', :sort => 'recent' %> |
-      <%= link_to '評価順', :action => 'show_score_detail' %> -
-      <%= link_to '表紙', :list => 'image', :sort => 'score' %> -
-      <%= link_to '書名', :list => 'text', :sort => 'score' %> |
+      <%= link_to '更新順', :list => 'detail', :sort => 'recent' %> -
+      <%= link_to '表紙',   :list => 'image',  :sort => 'recent' %> -
+      <%= link_to '書名',   :list => 'text',   :sort => 'recent' %> |
+      <%= link_to '評価順', :list => 'detail', :sort => 'score'  %> -
+      <%= link_to '表紙',   :list => 'image',  :sort => 'score'  %> -
+      <%= link_to '書名',   :list => 'text',   :sort => 'score'  %> |
       <%= link_to 'カテゴリ別', :action => 'category_image' %> -
       <%= link_to '書名', :action => 'category_text' %> |
       <%= link_to 'データリスト', :action => 'datalist' %>

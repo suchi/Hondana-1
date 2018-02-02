@@ -28,7 +28,8 @@ module ShelfHelper
       name =~ /^((.*):)?(#{@@ISBNPAT})$/
       shelfname = ($2.to_s == '' ? shelfname : $2.to_s)
       isbn = $3
-      book = Book.find(:first, :conditions => ['isbn = ?',isbn])
+      # book = Book.find(:first, :conditions => ['isbn = ?',isbn])
+      book = Book.where(:isbn => isbn)[0]
       if book.nil? then
         link_to '('+isbn+'登録)', :shelfname => shelfname, :action => 'newbooks', :isbn => isbn
       else

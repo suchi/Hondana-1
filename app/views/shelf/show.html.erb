@@ -3,13 +3,6 @@
     from app/views/shelf/show.rhtml
   -->
 
-<!-- shelf = Shelf.where(name: shelfname)[0] -->
-
-<!--
-shelf = params[:shelf] %>
-entries = params[:entries] %>
--->
-
 <%= render 'header', shelf: shelf, entries: entries  %>
 
 <div id="shelf_v">
@@ -21,6 +14,8 @@ entries = params[:entries] %>
       <%= render 'imagelist', entries: entries %>
     <% elsif shelf.listtype == 'text' %>
       <%= render 'textlist', entries: entries %>
+    <% else %>
+      <%= render 'detaillist', entries: entries %>
     <% end %>
   </div>
 </div>

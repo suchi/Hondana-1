@@ -50,30 +50,12 @@ class ShelfController < ApplicationController
     #end
   end
 
-  def ___entries(type, shelf, per_page)
-    Entry.where(:shelf_id => shelf.id).order("modtime DESC").paginate(:page => params[:page], :per_page => per_page)
-  end
-
-  # def entries(shelf, listtype, sorttype)
   def entries(shelf)
     per_page = (shelf.listtype == 'image' ? 60 : shelf.listtype == 'text' ? 200 : 20)
     sort = (shelf.sorttype == 'recent' ? "modtime DESC" : "score DESC")
     Entry.where(:shelf_id => shelf.id).order(sort).paginate(:page => params[:page], :per_page => per_page)
   end
   
-  #def show_recent(type, shelf, per_page)
-  #  shelf.listtype = type
-  #  shelf.sorttype = 'recent'
-  #  # shelf.save
-  #
-  #  # :conditionというのが使えなくなった模様
-  #  Entry.where(:shelf_id => shelf.id).order("modtime DESC").paginate(:page => params[:page], :per_page => per_page)
-  #end
-  #
-  #def show_recent_image(shelf)
-  #  show_recent('image',shelf,60)
-  #end
-
   private
   def getshelf
     shelfname = params[:shelfname]
