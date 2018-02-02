@@ -1,11 +1,9 @@
 <div id="shelf_imagelist">
   <% entries.each { |entry| %>
-    <!--div-->
     <div style='float:left;margin:0px;height:138px;width:96px;'>
       <div style='padding:0px;margin:0pt;height:8px;'><%= image_tag "/images/fms.gif", :class => "fms" %></div>
       <%= render 'imagetext', entry: entry %>
     </div>
-    <!--/div-->
   <% } %>
   <br clear="all">
 </div>
