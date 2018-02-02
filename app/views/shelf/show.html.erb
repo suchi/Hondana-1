@@ -1,5 +1,6 @@
 <!--
     本棚の書籍リスト
+    from app/views/shelf/show.rhtml
   -->
 
 <% shelfname = params['shelf'] %>
@@ -16,16 +17,8 @@
 	 これを where() に変えるらしい
       -->
     <% shelf = Shelf.where(name: shelfname)[0] %>
-    <% entrylist = shelf.entries %>
-    <% entrylist.each { |entry| %>
-      <% @entry = entry %>
-      <div style='float:left;margin:0px;height:138;width:96'>
-        <div style='padding:0px;margin:0pt;height:8'><%= image_tag "/images/fms.gif", :class => "fms" %></div>
-        <%= @entry.book.title %>
-      </div>
-    <% } %>
-
-    <!-- %= render :partial => 'imagelist' %> -->
+    <% @entrylist = shelf.entries %>
+    <%= render 'imagelist' %>
   </div>
 </div>
 <div id="shelf_shade"></div>
