@@ -1,0 +1,21 @@
+<table  style='font-size:small;'>
+  <tr>
+    <td>
+      <%= will_paginate entries if entries %>
+    </td>
+    <td>
+      <%= "|" if entries %>
+    </td>
+    <td>
+      <%= link_to '更新順', :action => 'show_recent_detail' %> -
+      <%= link_to '表紙', :action => 'show_recent_image' %> -
+      <%= link_to '書名', :action => 'show_recent_text' %> |
+      <%= link_to '評価順', :action => 'show_score_detail' %> -
+      <%= link_to '表紙', :action => 'show_score_image' %> -
+      <%= link_to '書名', :action => 'show_score_text' %> |
+      <%= link_to 'カテゴリ別', :action => 'category_image' %> -
+      <%= link_to '書名', :action => 'category_text' %> |
+      <%= link_to 'データリスト', :action => 'datalist' %>
+    </td>
+  </tr>
+</table>
