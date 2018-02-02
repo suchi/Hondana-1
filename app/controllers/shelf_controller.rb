@@ -12,42 +12,6 @@ class ShelfController < ApplicationController
     shelf.save
 
     render locals: { shelf: shelf, entries: entries(shelf) }
-
-    #case shelf.listtype
-    #when 'text'
-    #  case shelf.sorttype
-    #  when 'score'
-    #    show_score_text
-    #    render :action => 'show_score_text'
-    #  else
-    #    show_recent_text
-    #    render :action => 'show_recent_text'
-    #  end
-    #when 'detail'
-    #  case shelf.sorttype
-    #  when 'score'
-    #    show_score_detail
-    #    render :action => 'show_score_detail'
-    #  else
-    #    show_recent_detail
-    #    render :action => 'show_recent_detail'
-    #  end
-    #else
-    #  if shelf.sorttype == 'score' then
-    #    show_score_image
-    #    render :action => 'show_score_image'
-    #  else
-    #   #entries = show_recent_image shelf
-    #
-    #    e = entries('image', shelf, 60)
-    #    # render :action => 'show_recent_image', locals: { shelf: shelf, entries: e }
-    #    render :action => 'show', locals: { shelf: shelf, entries: e }
-    #
-    #    # params[:shelf] = shelf
-    #    # params[:entries] = e
-    #    # 自動で render show されるか
-    #  end
-    #end
   end
 
   def entries(shelf)
