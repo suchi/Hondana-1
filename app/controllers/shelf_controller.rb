@@ -21,10 +21,9 @@ class ShelfController < ApplicationController
     categories = Set.new
     shelf.entries.each { |entry|
       entry.categories.split(/,\s*/).each { |category|
-        categories.add category
+        categories.add category if category != ''
       }
     }
-    categories.delete '' # 空カテゴリは除去
     render locals: { shelf: shelf, categories: categories.to_a.sort }
   end
 
@@ -33,7 +32,8 @@ class ShelfController < ApplicationController
   def entries(shelf)
     per_page = (shelf.listtype == 'image' ? 60 : shelf.listtype == 'text' ? 200 : 20)
     sort = (shelf.sorttype == 'recent' ? "modtime DESC" : "score DESC")
-    Entry.where(:shelf_id => shelf.id).order(sort).paginate(:page => params[:page], :per_page => per_page)
+    # Entry.where(:shelf_id => shelf.id).order(sort).paginate(:page => params[:page], :per_page => per_page)
+    Entry.where(shelf_id: shelf.id).order(sort).paginate(:page => params[:page], :per_page => per_page)
   end
   
   def getshelf
