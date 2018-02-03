@@ -1,0 +1,38 @@
+<%= render 'header', shelf: shelf, entries: nil  %>
+
+<div id="menu_top">
+  <% s = (0...categories.length).each { |i|
+     category = categories[i] %>
+     <%= link_to category, "##{i}", :class => 'categoriestext' %>
+     <%= i < categories.length-1 ? " |\n" : "" %>
+  <% } %>
+</div>
+
+<div>
+  <% (0...categories.length).each { |i| %>
+    <h2>
+      <div id='header'>
+        <a name='<%= i %>'>
+        <b><%= link_to categories[i], :action => 'category_detail', :category => categories[i] %></b>
+        　
+        <font size='-1'>
+        <%= link_to '書籍変更', :shelf => shelf.name, :action => 'category_bookselect', :category => categories[i] %> | 
+        <%= link_to 'カテゴリ名変更／削除', :shelf => shelf.name, :action => 'category_rename', :category => categories[i] %>
+        </font>
+      </div>
+    </h2>
+    <div id="shelf_v">
+      <div id="shelf">
+        <div class="shelf_h"><%= image_tag "/images/fms.gif", :class => "fms" %></div>
+        <% entries = Entry.where("shelf_id = ? and categories like ?", shelf.id, "%#{categories[i]}%") %>
+        <%= render (shelf.listtype == 'image' ? 'imagelist' : 'textlist'), entries: entries %>
+        <div class="shelf_h"><%= image_tag "/images/fms.gif", :class => "fms" %></div>
+      </div>
+    </div>
+    <div id='menu_bottom'>
+      <%= render 'listmenu', entries: nil %>
+    </div>
+  <% } %>
+</div>
+
+<!-- render 'footer', entries: nil -->

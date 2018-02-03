@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   match ':shelfname' => 'shelf#show', :via => :get
   match ':shelfname/' => 'shelf#show', :via => :get
 
+  match ':shelfname/category' => 'shelf#category', :via => :get
+  
   # match ':controller(/:action(/:id))(.:format)' => 'welcome#index', :via => :get
   # controller という名前は特別なのかも
   
