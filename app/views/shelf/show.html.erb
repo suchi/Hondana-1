@@ -1,7 +1,6 @@
-<!--
-    本棚の書籍リスト
-    from app/views/shelf/show.rhtml
-  -->
+<%#
+   本棚の書籍リスト
+%>
 
 <%= render 'header', shelf: shelf, entries: entries  %>
 
@@ -11,16 +10,8 @@
 
 <div id="shelf_v">
   <div id="shelf">
-    <div class="shelf_h">
-      <%= image_tag "/images/fms.gif", :class => "fms" %>
-    </div>
-    <% if shelf.listtype == 'image' %>
-      <%= render 'imagelist', entries: entries %>
-    <% elsif shelf.listtype == 'text' %>
-      <%= render 'textlist', entries: entries %>
-    <% else %>
-      <%= render 'detaillist', entries: entries %>
-    <% end %>
+    <div class="shelf_h"><%= image_tag "/images/fms.gif", :class => "fms" %></div>
+    <%= render "#{shelf.listtype}list", entries: entries %> <!-- 'textlist', etc. -->
   </div>
 </div>
 <div id="shelf_shade"></div>

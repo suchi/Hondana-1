@@ -1,8 +1,14 @@
+<%#
+
+   shared/_header
+   本棚.org 共通ヘッダ
+
+%>
 <div id="hondana_org">
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td align="left">
-        <!-- '/' だとサイトのトップに飛んでしまうのがマズい -->
+        <%# '/' だとサイトのトップに飛んでしまうのがマズい  %>
 	<%= link_to image_tag("/images/fms.gif", :alt => "hondana.org", :id => "link_home"), url_for(:controller => 'bookshelf', :action => 'list') %>
       </td>
       <td align="right">
@@ -10,6 +16,10 @@
         <%= form_tag ({:controller => 'bookshelf', :action => 'search'}) do %>
         本を探す  <%= text_field_tag 'q' %> <%= submit_tag '本棚.orgで検索' %>
         <% end %>
+      </td>
+      <td align="right">
+        <br/>
+	&nbsp;
       </td>
       <td>
         <br/>
@@ -20,9 +30,9 @@
           <input type=submit value="Amazonで検索">
         </form>
       </td>
-      <td valign="top">
+      <td>
         <br/>
-	<%= link_to "本棚Scrapbox", "http://Scrapbox.io/hondana/" %>
+	<%= link_to "Scrapbox", "http://Scrapbox.io/hondana/" %>
       </td>
     </tr>
   </table>

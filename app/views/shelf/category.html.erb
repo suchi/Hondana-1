@@ -25,7 +25,7 @@
       <div id="shelf">
         <div class="shelf_h"><%= image_tag "/images/fms.gif", :class => "fms" %></div>
         <% entries = Entry.where("shelf_id = ? and categories like ?", shelf.id, "%#{categories[i]}%") %>
-        <%= render (shelf.listtype == 'image' ? 'imagelist' : 'textlist'), entries: entries %>
+        <%= render "#{shelf.listtype}list", entries: entries %> <%# "imagelist", etc. %>
         <div class="shelf_h"><%= image_tag "/images/fms.gif", :class => "fms" %></div>
       </div>
     </div>
