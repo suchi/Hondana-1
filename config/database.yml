@@ -39,8 +39,9 @@ development:
   # domain sockets, so uncomment these lines.
   # host: localhost
 
-  url: <%= ENV['DATABASE_URL'] %>
-    
+  # DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase"
+  # url: <%= ENV['DATABASE_URL'] %>
+  url: postgres://zoygwvdiktsehc:6966a34e53cf064bc3750128cfaaefcb6d97f60cce82d36b4c370c200f32465a@ec2-54-197-253-122.compute-1.amazonaws.com:5432/d1rk8j160fj3r7
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
