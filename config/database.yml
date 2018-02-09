@@ -88,8 +88,11 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
 production:
   <<: *default
-  database: hondana_production
+  host: masui.org
+  database: hondana
   username: hondana
-  password: <%= ENV['HONDANA_DATABASE_PASSWORD'] %>
+
+#password: <%= ENV['HONDANA_DATABASE_PASSWORD'] %>
