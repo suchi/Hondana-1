@@ -28,7 +28,7 @@ development:
   
   <<: *default
   # database: d1rk8j160fj3r7
-  database: d4gdvuj2slneqf
+  # database: d4gdvuj2slneqf
   # database: hondana
 
   # The specified database role being used to connect to postgres.
@@ -36,23 +36,23 @@ development:
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
   # username: zoygwvdiktsehc
-  username: uslopvvuvsvbef
+  # username: uslopvvuvsvbef
   # username: hondana
 
   # The password associated with the postgres role (username).
   # password: 6966a34e53cf064bc3750128cfaaefcb6d97f60cce82d36b4c370c200f32465a
-  password: e7792298062c62c2e58fa64f9f48157636735fe2c61d0260738fb79014b3197d
+  # password: e7792298062c62c2e58fa64f9f48157636735fe2c61d0260738fb79014b3197d
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
   # host: ec2-54-197-253-122.compute-1.amazonaws.com
-  host: ec2-54-243-59-122.compute-1.amazonaws.com
+  # host: ec2-54-243-59-122.compute-1.amazonaws.com
   # host: masui.org
 
   # DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase"
-  # url: <%= ENV['DATABASE_URL'] %>
   # url: postgres://hondana@masui.org/hondana
+  url: <%= ENV['DATABASE_URL'] %>
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
