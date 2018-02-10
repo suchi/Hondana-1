@@ -1,20 +1,21 @@
 Rails.application.routes.draw do
-  #
-  # 各本棚表示
-  #
-  # app/views/shelf/show.html.erb
+  # match ':controller(/:action(/:id))(.:format)' => 'welcome#index', :via => :get
+  # match ':shelfname' => 'shelf#show', :via => :get
+
+  # 各本棚トップ
   # app/controllers/shelf_controller.rb
-  match ':shelfname' => 'shelf#show', :via => :get
-  match ':shelfname/' => 'shelf#show', :via => :get
+  # app/views/shelf/show.html.erb
+  get ':shelfname' => 'shelf#show'
+  get ':shelfname/' => 'shelf#show'
 
-  get ':shelfname/category' => 'shelf#category'
-
+  # 書籍編集ページ
   get ':shelfname/:isbn' => 'shelf#edit', constraints: { isbn: /\d{9}[\dX]/ }
   
-  # match ':controller(/:action(/:id))(.:format)' => 'welcome#index', :via => :get
-  # controller という名前は特別なのかも
-  
+  # カテゴリ表示
+  get ':shelfname/category' => 'shelf#category'
+
+  # controller という名前は特別なのかも?
   match ':controller/:action', :via => :get
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # 詳細: http://guides.rubyonrails.org/routing.html
 end

@@ -9,7 +9,9 @@
 <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" %>
 
 <%= javascript_include_tag "/javascripts/md5.js" %>
-<!-- javascript_include_tag "/javascripts/iqauth.js" -->
+<!--  javascript_include_tag "/javascripts/iqauth.js" -->
+
+<!-- iqauth_js(@shelf,@book,@entry) -->
 
 <div id="shelf_v">
   <div id="shelf">
@@ -80,8 +82,8 @@
             <td valign="top">他の本棚</td>
             <td valign="top">
               <%=
-            	entry.book.entries.collect { |entry|
-                  entry.shelf.name
+            	entry.book.entries.collect { |e|
+                  e.shelf.name
                 }.find_all { |shelfname|
                   shelf.name != shelfname && shelfname !~ /_deleted/
                 }.collect { |shelfname|
@@ -96,10 +98,15 @@
               最終<span onmousedown='reload()'>更新</span> : <%= entry.modtime %>
             </td>
           </tr>
+	  
+	  <%= render 'authedit', shelf: shelf, book: book, entry: entry %>
+	  
+	  <!---
           <tr><td id='td00'></td><td id='td01'></td></tr>
           <tr><td id='td10'></td><td id='td11'></td></tr>
           <tr><td id='td20'></td><td id='td21'></td></tr>
           <tr><td id='td30'></td><td id='td31'></td></tr>
+	  -->
         </table>
       <% end %>
       <hr noshade size="1">
