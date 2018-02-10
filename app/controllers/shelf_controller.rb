@@ -14,6 +14,14 @@ class ShelfController < ApplicationController
     render locals: { shelf: shelf, entries: entries(shelf) }
   end
 
+  def edit
+    shelf = getshelf
+    book = getbook
+    entry = getentry(shelf,book)
+    
+    render locals: { shelf: shelf, book: book, entry: entry }
+  end
+
   def category
     shelf = getshelf
     shelf.listtype = params[:list]
@@ -32,12 +40,22 @@ class ShelfController < ApplicationController
   def entries(shelf)
     per_page = (shelf.listtype == 'image' ? 60 : shelf.listtype == 'text' ? 200 : 20)
     sort = (shelf.sorttype == 'recent' ? "modtime DESC" : "score DESC")
-    # Entry.where(:shelf_id => shelf.id).order(sort).paginate(:page => params[:page], :per_page => per_page)
     Entry.where(shelf_id: shelf.id).order(sort).paginate(:page => params[:page], :per_page => per_page)
   end
   
   def getshelf
     shelfname = params[:shelfname]
     Shelf.where(name: shelfname)[0]
+  end
+
+  def getbook
+    params[:isbn] =~ /\d{9}[\dX]/
+    isbn = $&
+    Book.where(isbn: isbn)[0]
+  end
+
+  def getentry(shelf, book)
+    logger.debug "shelf = #{shelf} book = #{book}"
+    Entry.where("shelf_id = ? and book_id = ?", shelf.id, book.id)[0]
   end
 end
