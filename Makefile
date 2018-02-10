@@ -1,4 +1,3 @@
 run:
-	DATABASE_URL=`cat DATABASE_URL` rails server
-masui:
-	DATABASE_URL=`cat DATABASE_URL_masui` rails server
+	DATABASE_URL=`heroku config -a hondana-heroku | grep DATABASE_URL | ruby -n -e 'puts $$_.split[1]'` rails server
+
