@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   match ':shelfname' => 'shelf#show', :via => :get
   match ':shelfname/' => 'shelf#show', :via => :get
 
-  match ':shelfname/:isbn' => 'shelf#edit', :via => :get
-  
-  match ':shelfname/category' => 'shelf#category', :via => :get
+  get ':shelfname/category' => 'shelf#category'
+
+  get ':shelfname/:isbn' => 'shelf#edit', constraints: { isbn: /\d{9}[\dX]/ }
   
   # match ':controller(/:action(/:id))(.:format)' => 'welcome#index', :via => :get
   # controller という名前は特別なのかも

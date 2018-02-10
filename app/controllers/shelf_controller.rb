@@ -24,6 +24,7 @@ class ShelfController < ApplicationController
 
   def category
     shelf = getshelf
+    # logger.debug "Category: shelf=#{shelf}"
     shelf.listtype = params[:list]
 
     categories = Set.new
