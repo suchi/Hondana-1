@@ -69,7 +69,7 @@
                       <%= link_to e.shelf.name+" :", :shelfname => e.shelf.name, :action => 'edit', :isbn => book.isbn %>
                     </td>
                     <td>
-                      <%= expand_tag(e.comment.to_s,e.shelf.name.to_s).to_s %>
+                      <%= expand_tag(e.comment.to_s,e.shelf.name.to_s).to_s.html_safe %>
                     </td>
                   </tr>
                 <% } %>
