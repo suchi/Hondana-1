@@ -85,8 +85,8 @@
                 }.find_all { |shelfname|
                   shelf.name != shelfname && shelfname !~ /_deleted/
                 }.collect { |shelfname|
-                  link_to(shelfname, :action => 'show', :shelfname => shelfname).html_safe
-                }.join(', ')
+                  link_to(shelfname, :action => 'show', :shelfname => shelfname)
+                }.join(', ').html_safe
               %>
             </td>
           </tr>
