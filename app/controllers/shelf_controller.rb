@@ -22,6 +22,24 @@ class ShelfController < ApplicationController
     render locals: { shelf: shelf, book: book, entry: entry }
   end
 
+  def write
+    # logger.debug "write: shelfname=#{params[:shelfname]}, isbn=#{params[:isbn]}"
+    shelf = getshelf
+    book = getbook
+    entry = getentry(shelf,book)
+    
+    entry.score = params[:entry][:score]
+    entry.categories = params[:entry][:categories].sub(/\s*$/,'')
+    entry.comment = params[:entry][:comment]
+    entry.modtime = Time.now
+    entry.clicktime = Time.now
+    entry.save
+    shelf.modtime = Time.now
+    shelf.save
+    
+    redirect_to :action => 'edit', :shelfname => shelf.name, :isbn => book.isbn
+  end
+
   def category
     shelf = getshelf
     # logger.debug "Category: shelf=#{shelf}"
@@ -56,7 +74,6 @@ class ShelfController < ApplicationController
   end
 
   def getentry(shelf, book)
-    logger.debug "shelf = #{shelf} book = #{book}"
     Entry.where("shelf_id = ? and book_id = ?", shelf.id, book.id)[0]
   end
 end

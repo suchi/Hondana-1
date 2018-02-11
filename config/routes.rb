@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   # カテゴリ表示
   get ':shelfname/category' => 'shelf#category'
 
+  # 書込み
+  post ':shelfname/write' => 'shelf#write'
+
   # controller という名前は特別なのかも?
   match ':controller/:action', :via => :get
 

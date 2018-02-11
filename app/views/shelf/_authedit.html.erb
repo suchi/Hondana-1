@@ -1,59 +1,21 @@
-<tr>
-  <td>カテゴリ</td>
-  <td><input type="text" name='entry[categories]' value='<%= entry.categories.to_s.gsub(/\'/,"\\\\\'") %>'></td>
-</tr>
-<tr>
-  <td>評　　価</td>
-  <td><input type="text" name='entry[score]' value='<%= entry.score.to_s.gsub(/\'/,"\\\\\'") %>'></td>
-</tr>
-<tr>
-  <td valign='top'>コメント</td>
-  <td>
-    <textarea name='entry[comment]' rows='10' cols='70'><%= entry.comment %>'></textarea>
-  </td>
-</tr>
-<tr>
-  <td></td>
-  <td><input type="submit" value="更新"></td>
-</tr>
-
-<!--
-  var td, input;
-  td  = document.getElementById('td01');
-  if(td.firstChild){
-    td.removeChild(td.firstChild);
-  }
-  input = document.createElement('input');
-  input.value = categories;
-  input.name = 'entry[categories]';
-  td.appendChild(input);
-  //s = document.createElement('span');
-  //s.value = 'e.g. 科学, 購入検討';
-  //td.appendChild(s);
-
-  td  = document.getElementById('td11');
-  input = document.createElement('input');
-  input.value = score;
-  input.name = 'entry[score]';
-  td.appendChild(input);
-  td = document.getElementById('td10');
-  td.innerHTML = '評　　価';
-
-  td  = document.getElementById('td21');
-  input = document.createElement('textarea');
-  input.value = comment;
-  input.name = 'entry[comment]';
-  // input.wrap = 'virtual'; ?? IE6でエラーになる
-  input.rows = '10';
-  input.cols = '70';
-  td.appendChild(input);
-  td = document.getElementById('td20');
-  td.vAlign = 'top';
-  td.innerHTML = 'コメント';
-
-  td  = document.getElementById('td31');
-  input = document.createElement('input');
-  input.type = 'submit'
-  input.value = '更新';
-  td.appendChild(input);
--->
+<% authorized = true %>
+<% if authorized then %>
+  <tr>
+    <td>カテゴリ</td>
+    <td><input type="text" name='entry[categories]' value='<%= entry.categories.to_s.gsub(/\'/,"\\\\\'") %>'></td>
+  </tr>
+  <tr>
+    <td>評　　価</td>
+    <td><input type="text" name='entry[score]' value='<%= entry.score.to_s.gsub(/\'/,"\\\\\'") %>'></td>
+  </tr>
+  <tr>
+    <td valign='top'>コメント</td>
+    <td>
+      <textarea name='entry[comment]' rows='10' cols='70'><%= entry.comment %></textarea>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><input type="submit" value="更新"></td>
+  </tr>
+<% end %>

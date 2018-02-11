@@ -95,7 +95,7 @@
           <tr>
             <td colspan="2" align="right">
               <hr noshade size="1">
-              最終<span onmousedown='reload()'>更新</span> : <%= entry.modtime %>
+              最終<span onmousedown='reload()'>更新</span> : <%= entry.modtime.localtime("+09:00") %>
             </td>
           </tr>
 	  
