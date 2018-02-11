@@ -2,7 +2,7 @@
   <% entries.each { |entry| %>
     <div style='float:left;margin:0px;height:138px;width:96px;'>
       <div style='padding:0px;margin:0pt;height:8px;'><%= image_tag "/images/fms.gif", :class => "fms" %></div>
-      <%= render 'imagetext', entry: entry %>
+      <%= render 'imagetext', entry: entry, usedot: true %>
     </div>
   <% } %>
   <br clear="all">
