@@ -8,6 +8,8 @@ class BookshelfController < ApplicationController
 
     dispshelves = Shelf.limit(15).order("modtime DESC").where.not("name like '%_deleted%'")
 
-    render locals: { newentries: newentries, dispshelves: dispshelves }
+    rand10 = Shelf.order("random()").limit(10) # .where.not("name like '%_deleted%'")
+
+    render locals: { newentries: newentries, dispshelves: dispshelves, rand10: rand10 }
   end
 end

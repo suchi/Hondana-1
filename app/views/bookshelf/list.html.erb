@@ -159,21 +159,19 @@
 		  <hr noshade="noshade" size="1"/>
 		  <h2>こんな本棚もいかが？　ランダムに10</h2>
 		  <table>
-		    <!--
-		    <!!% for shelf in @rand10 %>
+		    <% for shelf in rand10 %>
 		      <tr>
 			<td width='150'>
-			  <!!%= link_to shelf.name, {:controller => 'shelf', :shelfname => shelf.name, :action => 'show'} %>
+			  <%= link_to shelf.name, {:controller => 'shelf', :shelfname => shelf.name, :action => 'show'} %>
 			</td>
 			<td align='right'>
-			  (<!%= shelf.countbook %>/<!!%= shelf.countbook_comm %>)冊
+			  <%= shelf.countbook %>(<%= shelf.countbook_comment %>)冊
 			</td>
 			<td>
-			  <!!%=h shelf.description %>
+			  <%=h shelf.description %>
 			</td>
 		      </tr>
-		    <!!% end %>
-		    -->
+		    <% end %>
 		  </table>
 		</td>
 	      </tr>
