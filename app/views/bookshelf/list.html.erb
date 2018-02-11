@@ -77,6 +77,10 @@
 		  <hr noshade="noshade" size="1"/>
 		  <b>News</b><br/><br/>
 		  <!-- ********************************************************************************* -->
+		  2018/2/11
+		  <ul>
+		    <li>Rails5にアップデートしてHeroku+Postgresの運用に変更しました</li>
+		  </ul>
 		  <!--
 		  2014/4/14
 		  <ul>
@@ -127,13 +131,13 @@
 		    <div id='listdiv'>
 		      <table id='listtable'>
 		        <!-- for shelf in @dispshelves -->
-			<% for shelf in [] %>
+			<% for shelf in dispshelves %>
 			<tr>
 			  <td width='150'>
 			    <%= link_to shelf.name, {:controller => 'shelf', :shelfname => shelf.name, :action => 'show'} %>
 			  </td>
 			  <td align='right'>
-			    (<%= shelf.countbook %>/<%= shelf.countbook_comm %>)冊
+			    <%= shelf.countbook %>(<%= shelf.countbook_comment %>)冊
 			  </td>
 			  <td>
 			    <%
