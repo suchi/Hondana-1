@@ -11,8 +11,7 @@
 <div id="shelf_v">
   <div id="shelf">
     <div class="shelf_h"><%= image_tag "/images/fms.gif", :class => "fms" %></div>
-    <%#  'textlist', 'imagelist', etc. %>
-    <%= render "#{shelf.listtype}list", entries: entries %>
+    <%= render "#{shelf.listtype}list", entries: entries %> <%#  'textlist', 'imagelist', etc. %>
   </div>
 </div>
 

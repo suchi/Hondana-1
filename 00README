@@ -2,6 +2,11 @@
 
 Postgresへの変換
  ローカルマシンのMySQLに本棚データ読み込み
-  % mysql -u root -p hondana < /Volumes/Masui/Backups/hondana.org/hondana/db/backups/hondana.mysqldump
+  % mysql -u root -p hondana < /Volumes/Masui/Backups/hondana.org/hondana/db/backups/hondana.
+
+mysqldump
  pgloaderでPostgresに変換
   % pgloader mysql://root@localhost/hondana postgresql:///hondana
+
+デバッグ出力
+ logger.debug "write: shelfname=#{params[:shelfname]}, isbn=#{params[:isbn]}"

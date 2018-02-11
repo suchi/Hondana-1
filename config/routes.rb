@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   # 書込み
   post ':shelfname/write' => 'shelf#write', constraints: { shelfname: /[^\/]+/ }
 
+  # ヘルプ
+  get ':shelfname/help' => 'shelf#help', constraints: { shelfname: /[^\/]+/ }
+
   # controller という名前は特別なのかも?
   match ':controller/:action', :via => :get
 

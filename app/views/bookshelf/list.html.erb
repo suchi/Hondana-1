@@ -159,7 +159,7 @@
 		  <hr noshade="noshade" size="1"/>
 		  <h2>こんな本棚もいかが？　ランダムに10</h2>
 		  <table>
-		    <% for shelf in rand10 %>
+		    <% for shelf in rand %>
 		      <tr>
 			<td width='150'>
 			  <%= link_to shelf.name, {:controller => 'shelf', :shelfname => shelf.name, :action => 'show'} %>

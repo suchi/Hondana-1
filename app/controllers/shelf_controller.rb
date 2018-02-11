@@ -1,5 +1,5 @@
 class ShelfController < ApplicationController
-  def show
+  def show # 書籍リストを表示
     shelf = getshelf
     if shelf.nil? then
       redirect_to :controller => 'bookshelf', :action => 'list'
@@ -14,7 +14,7 @@ class ShelfController < ApplicationController
     render locals: { shelf: shelf, entries: entries(shelf) }
   end
 
-  def edit
+  def edit # 書籍情報編集
     shelf = getshelf
     book = getbook
     entry = getentry(shelf,book)
@@ -22,8 +22,7 @@ class ShelfController < ApplicationController
     render locals: { shelf: shelf, book: book, entry: entry }
   end
 
-  def write
-    # logger.debug "write: shelfname=#{params[:shelfname]}, isbn=#{params[:isbn]}"
+  def write # 書籍情報書込み
     shelf = getshelf
     book = getbook
     entry = getentry(shelf,book)
@@ -38,6 +37,12 @@ class ShelfController < ApplicationController
     shelf.save
     
     redirect_to :action => 'edit', :shelfname => shelf.name, :isbn => book.isbn
+  end
+  
+  def help
+    shelf = getshelf
+    
+    render locals: { shelf: shelf }
   end
 
   def category

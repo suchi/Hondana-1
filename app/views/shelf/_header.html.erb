@@ -16,7 +16,7 @@
 
 <div id="header">
   <h1>
-    <!-- name = shelf.nil? ? '' : shelf.name %> -->
+    <!-- name == shelf.nil? ? '' : shelf.name %> -->
     <% if shelf.url.to_s != '' %>
       <%= link_to shelf.name, shelf.url %>の本棚
     <% else %>
