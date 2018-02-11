@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)' => 'welcome#index', :via => :get
   # match ':shelfname' => 'shelf#show', :via => :get
 
+  root :to => 'bookshelf#list'
+  
   # 各本棚トップ
   # app/controllers/shelf_controller.rb
   # app/views/shelf/show.html.erb
