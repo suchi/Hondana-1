@@ -1,5 +1,5 @@
 <%#
-   編集
+   書籍編集ページ
 %>
 
 <%= render 'header', shelf: shelf, entries: nil %>
@@ -98,15 +98,10 @@
               最終<span onmousedown='reload()'>更新</span> : <%= entry.modtime.localtime("+09:00") %>
             </td>
           </tr>
-	  
+
+	  <!-- 認証ずみなら編集フォームを表示、そうでなければなぞなぞを表示 -->
 	  <%= render 'authedit', shelf: shelf, book: book, entry: entry %>
 	  
-	  <!---
-          <tr><td id='td00'></td><td id='td01'></td></tr>
-          <tr><td id='td10'></td><td id='td11'></td></tr>
-          <tr><td id='td20'></td><td id='td21'></td></tr>
-          <tr><td id='td30'></td><td id='td31'></td></tr>
-	  -->
         </table>
       <% end %>
       <hr noshade size="1">

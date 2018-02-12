@@ -16,14 +16,17 @@ Rails.application.routes.draw do
   # カテゴリ表示
   get ':shelfname/category' => 'shelf#category', constraints: { shelfname: /[^\/]+/ }
 
+  # ヘルプ
+  get ':shelfname/help' => 'shelf#help', constraints: { shelfname: /[^\/]+/ }
+
+  # 新規登録
+  get ':shelfname/newbooks' => 'shelf#newbooks', constraints: { shelfname: /[^\/]+/ }
+
   # 書込み
   post ':shelfname/write' => 'shelf#write', constraints: { shelfname: /[^\/]+/ }
 
   # 検索
   post 'bookshelf/search' => 'bookshelf#search'
-
-  # ヘルプ
-  get ':shelfname/help' => 'shelf#help', constraints: { shelfname: /[^\/]+/ }
 
   # controller という名前は特別なのかも?
   match ':controller/:action', :via => :get

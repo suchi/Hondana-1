@@ -38,10 +38,14 @@ class ShelfController < ApplicationController
     
     redirect_to :action => 'edit', :shelfname => shelf.name, :isbn => book.isbn
   end
+
+  def newbooks
+    shelf = getshelf
+    render locals: { shelf: shelf }
+  end
   
   def help
     shelf = getshelf
-    
     render locals: { shelf: shelf }
   end
 

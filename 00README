@@ -7,6 +7,15 @@ Postgresへの変換
 mysqldump
  pgloaderでPostgresに変換
   % pgloader mysql://root@localhost/hondana postgresql:///hondana
+    これだとうまくいかない?
+  % pgloader mysql://root@localhost/hondana postgres://hondana@localhost/hondana
+
+ローカルのダンプ作成
+  $ pg_dump -h localhost -U hondana --no-owner -c hondana > hondana.dmp
+Herokuにコピー
+  $ psql -h ec2-23-23-93-115.compute-1.amazonaws.com -U zjpssfcewhgwne -d d7ptthm9u8m7lk < hondana.dmp
+
+
 
 デバッグ出力
  logger.debug "write: shelfname=#{params[:shelfname]}, isbn=#{params[:isbn]}"
