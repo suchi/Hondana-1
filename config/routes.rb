@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   # 書込み
   post ':shelfname/write' => 'shelf#write', constraints: { shelfname: /[^\/]+/ }
 
+  # 検索
+  post 'booksearch/search' => 'bookshelf#search'
+
   # ヘルプ
   get ':shelfname/help' => 'shelf#help', constraints: { shelfname: /[^\/]+/ }
 

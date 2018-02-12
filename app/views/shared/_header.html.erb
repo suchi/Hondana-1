@@ -14,7 +14,7 @@
       <td align="right">
         <br/>
         <%= form_tag ({:controller => 'bookshelf', :action => 'search'}) do %>
-        本を探す  <%= text_field_tag 'q' %> <%= submit_tag '本棚.orgで検索' %>
+        本を探す  <%= text_field_tag 'query' %> <%= submit_tag '本棚.orgで検索' %>
         <% end %>
       </td>
       <td align="right">

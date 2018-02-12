@@ -47,8 +47,8 @@ module ShelfHelper
       end
       link_to desc, :shelfname => shelfname, :action => 'show'
     when /^(.*)\?$/
-      q = $1
-      link_to q, :controller=> 'bookshelf', :action => 'search', :q => q
+      query = $1
+      link_to query, :controller=> 'bookshelf', :action => 'search', :query => query
     else
       # link_to desc, :controller => 'search', :action => 'searchone', :q => name, :shelfname => shelfname
       #link_to desc, :action => 'search', :q => name
@@ -65,6 +65,7 @@ if $0 == __FILE__ then
   puts expand_tag("abc<d >efg",'xxx')
   puts expand_tag("abc<dd >efg",'xxx')
   puts expand_tag("abc<ddd >efg",'xxx')
-  s = "そもそもユーザは何を求めてるのかよく考えろ、と言ってるだけに聞こえる...<br>各事例は面白いのだが、それをまとめた「理論」など意味があるのだろうか? <p> 「そもそもから考える」ことを「ジョブ」という言葉を使っているだけである。マットレスを買った人の話があったが、<a 'bcd'>彼はマットレスが欲しかったのではなくて快眠が欲しかっただけだ、みたいな。これいったことを「快眠というジョブをハイアする」のように表現しており、そういう考えを「ジョブ理論」と呼んでいるようだ。 <br> そういう考え方は正しいだろうが理論というほどのものか? あたりまえではないのか??"
+  s = "そもそもユーザは何を求めてるのかよく考えろ、と言ってるだけに聞こえる...<BR>各事例は面白いのだが、それをまとめた「理論」など意味があるのだろうか? <p> 「そもそもから考える」ことを「ジョブ」という言葉を使っているだけである。マットレスを買った人の話があったが、<a 'bcd'>彼はマットレスが欲しかったのではなくて快眠が欲しかっただけだ、みたいな。これいったことを「快眠というジョブをハイアする」のように表現しており、そういう考えを「ジョブ理論」と呼んでいるようだ。 <br> そういう考え方は正しいだろうが理論というほどのものか? あたりまえではないのか??"
   puts expand_tag(s,'xxx')
+  # puts expand_tag("[[123]]","増井")
 end

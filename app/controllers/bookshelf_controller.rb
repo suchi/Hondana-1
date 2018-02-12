@@ -1,5 +1,14 @@
 class BookshelfController < ApplicationController
   def search
+    query = params[:query]
+    if query =~ /^\s*$/ then
+      redirect_to :action => 'list'
+      return
+    else
+      books = Book.where("authors like ? or title like ?", "%#{query}%", "%#{query}%")
+    end
+
+    render locals: { query: query, books: books }
   end
 
   def list

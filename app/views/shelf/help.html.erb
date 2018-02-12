@@ -7,12 +7,12 @@
       <h2>ヘルプ</h2>
       <ul>
 	<li>自分の本棚や共有本棚を簡単に作れます。</li>
-	<li>ログイン機能がないので他人の本棚も編集できます。</li>
-	<li>書込みを制限したい場合は
+	<li>編集が公開されている場合は他人の本棚も編集できます。</li>
+	<li>他人からの編集を制限したい場合は
 	  <%= link_to '本棚情報変更', {:action => 'profile_edit', :shelf => shelf.name} %>ページで「画像認証利用」をチェックし、
 	  <%= link_to '画像なぞなぞ認証問題', {:controller => 'iqauth', :action => 'create', :id => shelf.id} %>を作成して利用下さい。
 	<li>
-	  「評価」は文字列としてソートされますので、
+	  「評価」は文字列としてソートされるので、
 	  「★」〜「★★★★★」でも「1」〜「5」でも、
 	  ソートが意味をもつ記号や数字なら何でも使えます。
 	<li>「隠す」または「非表示」というカテゴリの本はリスト表示されません。（カテゴリだけが表示されます）
@@ -27,47 +27,42 @@
 	    <table border="1" cellspacing="0">
               <tr><th>コメント内の記述</th><th>表示</th></tr>
               <tr>
-		<td>&#147;[[増井:4798102040]]&#148;</td>
+		<td>“[[増井:4798102040]]”</td>
 		<td>
 		  <%= link_to 'コモンズ', :shelfname => '増井', :action => 'edit', :isbn => '4798102040' %>
 		</td>
               </tr>
               <tr>
-		<td>&#147;[[4798102040]]&#148;</td>
+		<td>“[[4798102040]]”</td>
 		<td><%= link_to 'コモンズ', :shelfname => shelf.name, :isbn => '4798102040', :action => 'edit' %></td>
               </tr>
               <tr>
-		<td>&#147;[[増井:]]&#148;</td>
+		<td>“[[増井:]]”</td>
 		<td><%= link_to '増井の本棚', :shelfname => '増井', :action => 'show' %></td>
               </tr>
               <tr>
-		<td>&#147;[[増井: 増井]]&#148;</td>
+		<td>“[[増井: 増井]]”</td>
 		<td><%= link_to '増井', :shelfname => '増井', :action => 'show' %></td>
               </tr>
               <tr>
-		<td>&#147;[[キーワード?]]&#148;</td>
+		<td>“[[キーワード?]]”</td>
 		<td><%= link_to 'キーワード', :controller => 'bookshelf', :action => 'search', :q => 'キーワード' %></td>
               </tr>
               <tr>
-		<td>&#147;[[コモンズ]]&#148;</td>
+		<td>“[[コモンズ]]”</td>
 		<td><%= link_to 'コモンズ', :shelfname => shelf.name, :action => 'search', :q => 'コモンズ' %></td>
               </tr>
               <tr>
-		<td>&#147;[[http://pitecan.com/ 増井のページ]]&#148;</td>
+		<td>“[[http://pitecan.com/ 増井のページ]]”</td>
 		<td><a href="http://pitecan.com/">増井のページ</a></td>
               </tr>
 	    </table>
 	  </blockquote>
 	  
-	<li>コメントの中ではHTMLタグのサブセット
-	  <%= "<b>, <li>, <br>, <p>など" %>)が使えます。
-	  <!-- (&lt;b&gt;, &lt;li&gt;, &lt;br&gt;, &lt;p&gt;など)が使えます。 -->
-	  &lt;a&gt; タグは使えません。
-	  
+	<li>コメントの中ではHTMLタグのサブセット(<%= "<b>, <li>, <br>, <p>など" %>)が使えます。<%= "<a>" %>タグは使えません。
 	<li>
 	  <%= link_to '類似本棚', :action => 'similar' %>で表示される「類似度」とは、
 	  本棚Aと本棚Bの両方に含まれる本の数を、本棚Aと本棚Bの本の数の平均で割ったものです。
-	  
 	<li>
 	  書籍登録ブックマークレット<a href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%C3%A5%AF%A5%DE%A1%BC%A5%AF%A5%EC%A5%C3%A5%C8">（ブックマークレットとは？）</a><br>
 	  以下のリンクをブックマーク(お気に入り)に登録しておけば、
@@ -77,6 +72,7 @@
 	  <a href="javascript:var%20src=document.location.href+document.body.innerHTML;re=new%20RegExp('(product|ASIN)/([0-9]{9}[0-9X])');if(src.match(re)){void(window.open('http://hondana.org/<%= CGI.escape(shelf.name) %>/add?isbns='+RegExp.$2))};"><%= shelf.name %>の本棚に登録</a>
 	  （クリックはしないで下さい。ブックマークレットはブックマークに登録して使うJavaScriptプログラムです）<br>
 	  <br>
+        <!--
 	<li>デフォルト本棚設定</li>
 	  <br>
 	  以下をクリックすると、http://hondana.org/ にアクセスしたとき自動的に
@@ -88,6 +84,7 @@
 	  <%= link_to 'デフォルト本棚を解除', :shelfname => shelf.name, :action => 'cookiereset' %>
 	  <br>
 	  <br>
+	  -->
       </ul>
       <div class="shelf_h"><%= image_tag "/images/fms.gif", :class => "fms" %></div>
     </div>
