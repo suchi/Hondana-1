@@ -159,6 +159,28 @@ class ShelfController < ApplicationController
     render locals: { shelf: shelf, category: params[:category]  }
   end
 
+  def category_bookset
+    shelf = getshelf
+    category = params[:category]
+    isbns = Set.new
+    params.each { |key,val|
+      if key =~ /^\d{9}[\dX]$/ then
+        isbns.add(key)
+      end
+    }
+    shelf.entries.each { |entry|
+      categories = Set.new(entry.categories.split(/,\s*/))
+      if categories.member?(category) && !isbns.member?(entry.book.isbn) then
+        categories.delete(category)
+      elsif !categories.member?(category) && isbns.member?(entry.book.isbn) then
+        categories.add(category)
+      end
+      entry.categories = categories.to_a.join(', ')
+      entry.save
+    }
+    redirect_to :action => 'category_bookselect', :category => category
+  end
+  
   def setname
     shelf = getshelf
     newname = params[:shelf][:name]
