@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   post ':shelfname/write' => 'shelf#write', constraints: { shelfname: /[^\/]+/ }
 
   # 検索
-  post 'booksearch/search' => 'bookshelf#search'
+  post 'bookshelf/search' => 'bookshelf#search'
 
   # ヘルプ
   get ':shelfname/help' => 'shelf#help', constraints: { shelfname: /[^\/]+/ }
