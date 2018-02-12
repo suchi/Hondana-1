@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   # データリスト
   get ':shelfname/datalist' => 'shelf#datalist', constraints: { shelfname: /[^\/]+/ }
 
+  # 書籍削除
+  post ':shelfname/delete' => 'shelf#delete', constraints: { shelfname: /[^\/]+/ }
+  post ':shelfname/realdelete' => 'shelf#realdelete', constraints: { shelfname: /[^\/]+/ }
+
   # 新規登録
   get ':shelfname/newbooks' => 'shelf#newbooks', constraints: { shelfname: /[^\/]+/ }
 

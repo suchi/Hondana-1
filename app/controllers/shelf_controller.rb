@@ -162,7 +162,6 @@ class ShelfController < ApplicationController
     redirect_to :action => 'profile_edit'
   end
 
-  
   def help
     shelf = getshelf
     render locals: { shelf: shelf }
@@ -171,6 +170,21 @@ class ShelfController < ApplicationController
   def rename
     shelf = getshelf
     render locals: { shelf: shelf }
+  end
+
+  def delete
+    shelf = getshelf
+    book = getbook
+    entry = getentry(shelf,book)
+    render locals: { shelf: shelf, book: book, entry: entry }
+  end
+
+  def realdelete
+    shelf = getshelf
+    book = getbook
+    entry = getentry(shelf,book)
+    entry.destroy
+    redirect_to :shelfname => shelf.name, :action => 'show'
   end
 
   def datalist

@@ -122,7 +122,7 @@ var reload = function(){
         </tr>
         <tr>
           <td id="deleteform">
-            <% form_tag({:action => 'delete', :isbn => book.isbn}) do %>
+            <%= form_tag({:action => 'delete', :isbn => book.isbn}) do %>
               <%= submit_tag "この本棚から削除" %>
             <% end %>
           </td>
