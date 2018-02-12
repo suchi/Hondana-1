@@ -155,6 +155,62 @@ class ShelfController < ApplicationController
     render locals: { shelf: shelf }
   end
 
+  def setname
+    shelf = getshelf
+    newname = params[:shelf][:name]
+
+    # # spam対策のため、!! を最後につけたときだけ名前変更を許す
+    # if newname !~ /!!$/ then
+    #   redirect_to :action => 'show', :shelfname => @shelf.name
+    #   return
+    # end
+    # newname.sub!(/!!$/,'')
+
+    if newname.index('<') || newname =~ /%3c/i then # 変な名前を許さない
+      redirect_to :action => 'show', :shelfname => shelf.name
+      return
+    end
+
+    #return # SPAM対策するときはここでリターンしてしまう
+
+    if newname == '' then
+      newname = shelf.name + '_deleted000'
+      while Shelf.where(:name => newname).length > 0
+        newname = newname.succ
+      end
+      redirect_to :controller => 'bookshelf', :action => 'list'
+      return
+    else
+      if Shelf.where(:name => newname).length > 0 then
+        redirect_to :action => 'rename', :shelfname => newname, :error => "同じ名前の本棚が存在します"
+        return
+      end
+    end
+
+    shelf.name = newname # 本棚名変更!!
+    shelf.modtime = Time.now
+    shelf.save
+    
+    redirect_to :action => 'show', :shelfname => newname
+
+#    if newname == '' then
+#      # 本棚消去する必要があるが、どうやるかは未定。
+#      newname = 
+#    end
+#    if Shelf.find(:first, :conditions => ["name = ?", newname]).nil? then
+#      @shelf.name = newname # 本棚名変更!!
+#      @shelf.modtime = Time.now
+#      @shelf.save
+#    else
+#      # 本棚が既に存在する.... エラーをうまく表示すること。
+#      # @shelf.errors.add_to_base("同じ名前の本棚が存在します") だとうまくいかない...
+#      @newname = @shelf.name
+#      redirect_to :action => 'rename', :shelfname => @newname, :error => "同じ名前の本棚が存在します"
+#    end
+#    redirect_to :action => 'show', :shelfname => @newname
+  end
+
+  
   def category
     shelf = getshelf
     # logger.debug "Category: shelf=#{shelf}"

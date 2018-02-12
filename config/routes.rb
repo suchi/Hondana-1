@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   # 本棚名変更
   get ':shelfname/rename' => 'shelf#rename', constraints: { shelfname: /[^\/]+/ }
-  # post ':shelfname/profile_write' => 'shelf#profile_write', constraints: { shelfname: /[^\/]+/ }
+  post ':shelfname/setname' => 'shelf#setname', constraints: { shelfname: /[^\/]+/ }
 
   # 新規登録
   post ':shelfname/add' => 'shelf#add', constraints: { shelfname: /[^\/]+/ }
