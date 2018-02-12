@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   # ヘルプ
   get ':shelfname/help' => 'shelf#help', constraints: { shelfname: /[^\/]+/ }
 
+  # データリスト
+  get ':shelfname/datalist' => 'shelf#datalist', constraints: { shelfname: /[^\/]+/ }
+
   # 新規登録
   get ':shelfname/newbooks' => 'shelf#newbooks', constraints: { shelfname: /[^\/]+/ }
 

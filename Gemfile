@@ -60,3 +60,5 @@ gem 'listen'
 
 gem 'will_paginate'
 gem 'amazon-ecs'
+
+gem 'json'

@@ -173,6 +173,33 @@ class ShelfController < ApplicationController
     render locals: { shelf: shelf }
   end
 
+  def datalist
+    shelf = getshelf
+
+    jsonstr = shelf.entries.collect { |entry|
+      book = entry.book
+      {
+        title:      book.title,
+        isbn:       book.isbn,
+        date:       entry.modtime,
+        publisher:  book.publisher,
+        authors:    book.authors,
+        categories: entry.categories,
+        score:      entry.score,
+        comment:    entry.comment
+      }
+    }.to_json
+        .gsub(/","/,"\",\n  \"")
+        .gsub(/\},\{/,"\n},\n{")
+        .gsub(/\{"/,"{\n  \"")
+        .gsub(/":"/,"\" : \"")
+        .sub(/\[\{/,"[\n{")
+        .sub(/\}\]/,"\n}\n]")
+        .gsub(/</,"&lt;")
+
+    render locals: { shelf: shelf, jsonstr: jsonstr }
+  end
+  
   def category_detail
     shelf = getshelf
     render locals: { shelf: shelf, category: params[:category]  }
