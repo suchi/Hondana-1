@@ -1,0 +1,51 @@
+<%= render 'header', shelf: shelf, entries: nil %>
+
+<div id="shelf_v">
+  <div id="shelf">
+    <div class="shelf_h"><%= image_tag "/images/fms.gif", :class => "fms" %></div>
+    <div class="list">
+      <h2>本棚情報変更</h2>
+      <p></p>
+      <%= form_tag({:shelfname => shelf.name, :action => 'profile_write'}) do %>
+      <table>
+        <tr>
+          <td valign='top'>本棚の説明</td>
+          <td>
+            <%= text_area_tag 'shelf[description]', shelf.description, :wrap => 'virtual', :cols => 80, :rows => 10, :align => 'top' %>
+          </td>
+        </tr>
+        <tr>
+          <td>関連URL</td>
+          <td>
+            <%= text_field_tag 'shelf[url]', shelf.url, :size => 80 %>
+          </td>
+        </tr>
+        <tr>
+          <td>アソシエイトID</td>
+          <td>
+            <%= text_field_tag 'shelf[affiliateid]', shelf.affiliateid, :size => 80 %>
+          </td>
+        </tr>
+        <tr>
+          <td>画像認証利用
+	  </td>
+          <td>
+	    <%= check_box_tag "shelf[use_iqauth]", 1, checked = (shelf.use_iqauth.to_s != '1' ? false : true) %>
+	    <%= link_to '認証問題作成', {:controller => 'iqauth', :action => 'create', :id => shelf.id} %>が必要です
+          </td>
+        </tr>
+      </table>
+      <p></p>
+      <%= submit_tag "　変更　" %>
+      <% end %>
+    </div>
+    <div class="shelf_h"><%= image_tag "/images/fms.gif", :class => "fms" %></div>
+  </div>
+  <div id="shelf_shade"></div>
+  
+  <div id='menu_bottom'>
+    <%= render 'listmenu', entries: nil %>
+  </div>
+  
+  <%= render 'shared/footer' %>
+</div>
