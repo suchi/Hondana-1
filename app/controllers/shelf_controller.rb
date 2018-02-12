@@ -1,4 +1,7 @@
 class ShelfController < ApplicationController
+
+  require 'amazon'
+  
   def show # 書籍リストを表示
     shelf = getshelf
     if shelf.nil? then
@@ -43,6 +46,64 @@ class ShelfController < ApplicationController
     shelf = getshelf
     render locals: { shelf: shelf }
   end
+
+  def add
+    shelf = getshelf
+    s = params[:isbns]
+    s.gsub!(/[\r\n]/,' ')
+    s.gsub!(/\-/,'')
+
+    isbns = []
+    while s =~ /^(.*)(978\d{10})(.*)$/m do
+      s = $1+$3
+      isbns << id2isbn($2)
+    end
+    while s =~ /^(.*)(\d{9}[\dX])(.*)$/m do
+      s = $1+$3
+      isbns << $2
+    end
+
+    if isbns.length == 0 then
+      redirect_to :action => 'newbooks', :error => "10桁のISBNか13桁のバーコード番号を指定して下さい。"
+      return
+    end
+    if isbns.length >= 10 then
+      redirect_to :action => 'newbooks', :error => "ISBN指定は10個までにして下さい。"
+      return
+    end
+
+    amazon = MyAmazon.new
+    amazon.get_data(isbns.join(","))
+    isbns.each { |isbn|
+      book = Book.where(isbn: isbn)[0]
+      if book.nil? then
+        book = Book.new
+        book.isbn = isbn
+        book.title = amazon.title(isbn)
+        book.publisher = amazon.publisher(isbn)
+        book.authors = amazon.authors(isbn)
+        book.price = 0
+        book.imageurl = amazon.image(isbn)
+        book.modtime = Time.now
+        book.save
+      end
+
+      entry = Entry.where("book_id = ? and shelf_id = ?", book.id, shelf.id)[0]
+      if entry.nil? then
+        entry = Entry.new
+        entry.book_id = book.id
+        entry.shelf_id = shelf.id
+        entry.modtime = Time.now
+        entry.clicktime = Time.now
+        entry.comment = ''
+        entry.score = ''
+        entry.categories = ''
+        entry.save
+      end
+    }
+
+    redirect_to :action => 'edit', :shelfname => shelf.name, :isbn => isbns[0]
+  end
   
   def help
     shelf = getshelf
@@ -83,6 +144,26 @@ class ShelfController < ApplicationController
   end
 
   def getentry(shelf, book)
+    p shelf
+    p book
     Entry.where("shelf_id = ? and book_id = ?", shelf.id, book.id)[0]
   end
+
+  def add_checksum(isbn)
+    v = 0
+    (0..8).each { |i|
+      v += isbn[i,1].to_i * (i+1)
+    }
+    v %= 11
+    checksum = (v == 10 ? 'X' : v.to_s)
+    isbn + checksum
+  end
+
+  def id2isbn(id)
+    # 書籍のバーコードのISBNは'978'で始まり、チェックサムで終わっている
+    # ようなのでこれを除去してISBNのチェックサムを付加する
+    #
+    add_checksum(id.gsub(/^.../,'').gsub(/.$/,''))
+  end
+
 end

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # -*- ruby -*-
 #
+# Amazonの書籍データを取得
+#
 
 require "amazon/ecs"
 
@@ -14,7 +16,9 @@ class MyAmazon
     # 10個まで取得可能
     # 連続呼び出しできない
     #
-    #begin
+    # 認証情報は環境変数に書いておく
+    #
+    begin
       Amazon::Ecs.configure do |options|
         options[:AWS_access_key_id] = ENV["AWS_ACCESS_KEY_ID"]
         options[:AWS_secret_key]    = ENV["AWS_SECRET_ACCESS_KEY"]
@@ -32,9 +36,14 @@ class MyAmazon
         @@data[isbn]['Author'] = element.get('Author')
         @@data[isbn]['Publisher'] = element.get('Manufacturer')
       end
-    #rescue
-    #  puts "Amazon error"
-    #end
+    rescue => e
+      if __FILE__ == $0 then
+        puts "Amazon API error... isbn=#{isbns}"
+        puts e
+      else
+        logger.debug "Amazon API error... isbn=#{isbns}"
+      end
+    end
   end
 
   def get_onedata(isbn)
@@ -104,6 +113,7 @@ if __FILE__ == $0 then
   amazon = MyAmazon.new
   isbn = '0262011530'
   isbn = '4063192393'
+  isbn = '4065020352'
   puts amazon.title(isbn)
   puts amazon.publisher(isbn)
   puts amazon.authors(isbn)

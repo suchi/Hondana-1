@@ -1,3 +1,9 @@
+<%#
+
+   書籍登録
+
+%>
+
 <%= render 'header', shelf: shelf, entries: nil %>
 
 <div id="shelf_v">
@@ -11,7 +17,7 @@
         <% if params[:error].to_s != '' then%>
           <br/><font color='red'><%= params[:error] %></font><br/>
         <% end %>
-        <!-- = text_area 'isbns', 'list', :wrap => 'virtual', :cols => 40, :rows => 10, :align => 'top', :value => @isbns.to_s %> -->
+        <!-- = text_area 'isbnns', 'list', :wrap => 'virtual', :cols => 40, :rows => 10, :align => 'top', :value => @isbns.to_s %> -->
         <%= text_area_tag 'isbns', '', :wrap => 'virtual', :cols => 40, :rows => 10, :align => 'top' %>
  	<br/>
         <%= submit_tag "書籍追加" %><br/>
