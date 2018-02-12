@@ -154,6 +154,11 @@ class ShelfController < ApplicationController
     render locals: { shelf: shelf }
   end
 
+  def category_detail
+    shelf = getshelf
+    render locals: { shelf: shelf, category: params[:category]  }
+  end
+  
   def category_bookselect
     shelf = getshelf
     render locals: { shelf: shelf, category: params[:category]  }
@@ -179,6 +184,27 @@ class ShelfController < ApplicationController
       entry.save
     }
     redirect_to :action => 'category_bookselect', :category => category
+  end
+  
+  def category_rename
+    shelf = getshelf
+    render locals: { shelf: shelf, category: params[:category]  }
+  end
+  
+  def category_setname
+    shelf = getshelf
+    category = params[:category]
+    newcategory = params[:newcategory]
+    shelf.entries.each { |entry|
+      categories = Set.new(entry.categories.split(/,\s*/))
+      if categories.member?(category) then
+        categories.delete(category)
+        categories.add(newcategory) if newcategory != ''
+        entry.categories = categories.to_a.join(', ')
+        entry.save
+      end
+    }
+    redirect_to :action => (newcategory == '' ? 'category_text' : 'category_detail'), :category => newcategory
   end
   
   def setname

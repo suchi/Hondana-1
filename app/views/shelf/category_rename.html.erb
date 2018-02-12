@@ -1,0 +1,22 @@
+<%= render 'header', shelf: shelf, entries: nil %>
+
+<div id="shelf_v">
+  <div id="shelf">
+    <div class="shelf_h"><%= image_tag "/images/fms.gif", :class => "fms" %></div>
+    <div class="list">
+    「<%= category %>」カテゴリ名称変更<p>
+      <%= form_tag ({:action => 'category_setname', :shelfname => shelf.name, :category => category}) do %>
+         新しいカテゴリ名を入力してボタンを押して下さい。空白のまま書き込むと「<%= category %>」カテゴリが消去されます。<p>
+        <input name='newcategory' size='30' type='text' value='<%= category %>'>
+        <%= submit_tag "カテゴリ名変更" %>
+      <% end %>
+    </div>
+    <div class="shelf_h"><%= image_tag "/images/fms.gif", :class => "fms" %></div>
+  </div>
+<div id="shelf_shade"></div>
+
+<div id='menu_bottom'>
+  <%= render 'listmenu', entries: nil %>
+</div>
+
+<%= render 'footer', entries: nil %>
