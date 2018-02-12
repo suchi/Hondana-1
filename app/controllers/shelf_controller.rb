@@ -104,6 +104,46 @@ class ShelfController < ApplicationController
 
     redirect_to :action => 'edit', :shelfname => shelf.name, :isbn => isbns[0]
   end
+
+  def profile_edit
+    shelf = getshelf
+    render locals: { shelf: shelf }
+  end
+
+  def profile_write
+    shelf = getshelf
+
+    # if cookies[:CurrentShelf] == @shelf.name then
+    description = params[:shelf][:description]
+    affiliateid = params[:shelf][:affiliateid]
+    url = params[:shelf][:url]
+    
+    shelf.description = description
+    shelf.url = url
+    shelf.affiliateid = affiliateid
+    # puts "------------------" + params[:shelf][:use_iqauth].to_s
+    shelf.use_iqauth = (params[:shelf][:use_iqauth].to_s == '1' ? '1' : '0')
+    shelf.save
+
+    #if description !~ /href=/i then
+    #  # 単純なタグだけ許す細工
+    #  desc = description.gsub(/<(\/?(b|br|p|ul|ol|li|dl|dt|dd|hr|pre|blockquote|del))>/i,'')
+    #  if desc !~ /</ && description !~ /%3c/i then
+    #    if affiliateid !~ /</ && affiliateid !~ /%3c/i then
+    #      if url !~ /</ && url !~ /%3c/i then
+    #        @shelf.description = description
+    #        @shelf.url = url
+    #        @shelf.affiliateid = affiliateid
+    #        @shelf.use_iqauth = params[:shelf][:use_iqauth]
+    #        @shelf.save
+    #      end
+    #    end
+    #  end
+    #end
+    # end
+    redirect_to :action => 'profile_edit'
+  end
+
   
   def help
     shelf = getshelf

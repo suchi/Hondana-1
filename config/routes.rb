@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   # 新規登録
   get ':shelfname/newbooks' => 'shelf#newbooks', constraints: { shelfname: /[^\/]+/ }
 
+  # 本棚情報編集
+  get ':shelfname/profile_edit' => 'shelf#profile_edit', constraints: { shelfname: /[^\/]+/ }
+  post ':shelfname/profile_write' => 'shelf#profile_write', constraints: { shelfname: /[^\/]+/ }
+
   # 新規登録
   post ':shelfname/add' => 'shelf#add', constraints: { shelfname: /[^\/]+/ }
 
