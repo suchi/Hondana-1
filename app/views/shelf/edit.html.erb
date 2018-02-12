@@ -13,6 +13,15 @@
 
 <!-- iqauth_js(@shelf,@book,@entry) -->
 
+<script type="text/javascript">
+var reload = function(){
+  $.ajax({
+    type: 'GET',
+    url: "<%= url_for :action => 'reload', :shelfname => shelf.name, :isbn => book.isbn %>"
+  });
+}
+</script>
+
 <div id="shelf_v">
   <div id="shelf">
     <div class="shelf_h"><%= image_tag("/images/fms.gif", :class => "fms") %></div>
@@ -34,18 +43,20 @@
           <tr>
             <td></td>
             <td>
-              <% book.authors.split(/,\s*/).each { |author| %>
+              <% book.authors.to_s.split(/,\s*/).each { |author| %>
                 <%= link_to author, :controller => 'bookshelf', :action => 'search', :q => author %>
               <% } %>
               <br/>
               <%= book.publisher %>
               <br/>
               ISBN: <%= book.isbn %>　
-              <a href='http://bookweb.kinokuniya.co.jp/guest/cgi-bin/wshosea.cgi?W-ISBN=<%= book.isbn %>'>bookweb</a>,
+              <a href='http://bookweb.kinokuniya.co.jp/guest/cgi-bin/wshosea.cgi?W-ISBN=<%= book.isbn %>'>紀伊國屋</a>,
               <a href='http://www.amazon.co.jp/exec/obidos/ASIN/<%= book.isbn %>/<%= affiliate_id %>/ref=nosim/'>Amazon</a>,
-              <a href='http://webcatplus.nii.ac.jp/assoc.cgi?mode=equal0&isbn=<%= book.isbn %>'>WebCat</a>,
+              <a href='http://webcatplus.nii.ac.jp/assoc.cgi?mode=equal0&isbn=<%= book.isbn %>'>WebCat</a>
+	      <!--
               <a href='http://shinshomap.info/book/<%= book.isbn %>.html'>新書マップ</a>,
               <a href='http://my.safaribooksonline.com/<%= book.isbn %>'>SafariBooks</a>
+	      -->
             </td>
           </tr>
           <tr>

@@ -105,6 +105,25 @@ class ShelfController < ApplicationController
     redirect_to :action => 'edit', :shelfname => shelf.name, :isbn => isbns[0]
   end
 
+  def reload
+    shelf = getshelf
+    params[:isbn] =~ /\d{9}[\dX]/
+    isbn = $&
+    book = Book.where(isbn: isbn)[0]
+    if book.nil? then
+      book = Book.new
+      book.isbn = isbn
+    end
+    amazon = MyAmazon.new
+    book.title = amazon.title(isbn)
+    book.publisher = amazon.publisher(isbn)
+    book.authors = amazon.authors(isbn)
+    book.price = 0
+    book.imageurl = amazon.image(isbn)
+    book.modtime = Time.now
+    book.save
+  end
+
   def profile_edit
     shelf = getshelf
     render locals: { shelf: shelf }

@@ -30,11 +30,10 @@ class MyAmazon
       res.items.each do |item|
         isbn =item.get('ASIN')
         element = item.get_element('ItemAttributes');
-        author = element.get('Author')
         @@data[isbn] = {}
-        @@data[isbn]['Title'] = element.get('Title')
-        @@data[isbn]['Author'] = element.get('Author')
-        @@data[isbn]['Publisher'] = element.get('Manufacturer')
+        @@data[isbn]['Title'] = element.get('Title').to_s
+        @@data[isbn]['Author'] = element.get('Author').to_s
+        @@data[isbn]['Publisher'] = element.get('Manufacturer').to_s
       end
     rescue => e
       if __FILE__ == $0 then
