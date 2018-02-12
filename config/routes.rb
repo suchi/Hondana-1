@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   post ':shelfname/category_bookset' => 'shelf#category_bookset', constraints: { shelfname: /[^\/]+/ }
 
   get ':shelfname/category_detail' => 'shelf#category_detail', constraints: { shelfname: /[^\/]+/ }
+  get ':shelfname/category_simple' => 'shelf#category_simple', constraints: { shelfname: /[^\/]+/ }
   get ':shelfname/category_rename' => 'shelf#category_rename', constraints: { shelfname: /[^\/]+/ }
   post ':shelfname/category_setname' => 'shelf#category_setname', constraints: { shelfname: /[^\/]+/ }
 

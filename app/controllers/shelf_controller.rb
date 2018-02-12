@@ -159,6 +159,11 @@ class ShelfController < ApplicationController
     render locals: { shelf: shelf, category: params[:category]  }
   end
   
+  def category_simple
+    shelf = getshelf
+    render locals: { shelf: shelf, category: params[:category]  }
+  end
+  
   def category_bookselect
     shelf = getshelf
     render locals: { shelf: shelf, category: params[:category]  }
