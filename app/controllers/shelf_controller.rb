@@ -150,6 +150,11 @@ class ShelfController < ApplicationController
     render locals: { shelf: shelf }
   end
 
+  def rename
+    shelf = getshelf
+    render locals: { shelf: shelf }
+  end
+
   def category
     shelf = getshelf
     # logger.debug "Category: shelf=#{shelf}"
