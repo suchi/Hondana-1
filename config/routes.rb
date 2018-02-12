@@ -39,6 +39,9 @@ Rails.application.routes.draw do
   # 検索
   post 'bookshelf/search' => 'bookshelf#search'
 
+  # カテゴリ編集
+  get ':shelfname/category_bookselect' => 'shelf#category_bookselect', constraints: { shelfname: /[^\/]+/ }
+
   # controller という名前は特別なのかも?
   match ':controller/:action', :via => :get
 

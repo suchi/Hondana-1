@@ -121,7 +121,6 @@ class ShelfController < ApplicationController
     shelf.description = description
     shelf.url = url
     shelf.affiliateid = affiliateid
-    # puts "------------------" + params[:shelf][:use_iqauth].to_s
     shelf.use_iqauth = (params[:shelf][:use_iqauth].to_s == '1' ? '1' : '0')
     shelf.save
 
@@ -153,6 +152,11 @@ class ShelfController < ApplicationController
   def rename
     shelf = getshelf
     render locals: { shelf: shelf }
+  end
+
+  def category_bookselect
+    shelf = getshelf
+    render locals: { shelf: shelf, category: params[:category]  }
   end
 
   def setname
