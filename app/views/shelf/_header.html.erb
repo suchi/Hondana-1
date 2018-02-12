@@ -23,7 +23,7 @@
       <%= shelf.name %>の本棚
     <% end %>
   </h1>
-  <p class="description"><%= expand_tag shelf.description, shelf.name %><p>
+  <p class="description"><%= expand_tag(shelf.description, shelf.name).html_safe %><p>
   </p>
 </div>
 
