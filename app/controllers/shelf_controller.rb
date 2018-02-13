@@ -290,13 +290,15 @@ class ShelfController < ApplicationController
 
     #return # SPAM対策するときはここでリターンしてしまう
 
+    puts "newname = #{newname}"
     if newname == '' then
       newname = shelf.name + '_deleted000'
       while Shelf.where(:name => newname).length > 0
         newname = newname.succ
       end
-      redirect_to :controller => 'bookshelf', :action => 'list'
-      return
+      puts "newname = #{newname}"
+      # redirect_to :controller => 'bookshelf', :action => 'list'
+      # return
     else
       if Shelf.where(:name => newname).length > 0 then
         redirect_to :action => 'rename', :shelfname => newname, :error => "同じ名前の本棚が存在します"
@@ -307,8 +309,12 @@ class ShelfController < ApplicationController
     shelf.name = newname # 本棚名変更!!
     shelf.modtime = Time.now
     shelf.save
-    
-    redirect_to :action => 'show', :shelfname => newname
+
+    if newname =~ /_deleted/ then
+      redirect_to :controller => 'bookshelf', :action => 'list'
+    else
+      redirect_to :action => 'show', :shelfname => newname
+    end
 
 #    if newname == '' then
 #      # 本棚消去する必要があるが、どうやるかは未定。

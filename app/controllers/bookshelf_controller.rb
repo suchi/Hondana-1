@@ -19,6 +19,15 @@ class BookshelfController < ApplicationController
     render locals: { newentries: newentries, dispshelves: dispshelves, rand: rand }
   end
   
+  def shelfsearch
+    query = params[:query]
+    newentries = Entry.limit(10).where.not(:comment => "").order("modtime DESC") # _deletedな本棚の本も見えてしまう? まぁ良いか??
+    dispshelves = Shelf.limit(15).where("name like '%#{query}%'").where.not("name like '%_deleted%'").order("modtime DESC")
+    rand = Shelf.order("random()").limit(10).where.not("name like '%_deleted%'")
+
+    render :action => 'list', locals: { newentries: newentries, dispshelves: dispshelves, rand: rand }
+  end
+  
   def create
     # redirect_to :action => 'list'
     shelfname = params[:shelfname]

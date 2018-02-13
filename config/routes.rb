@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   # 本棚作成
   post 'bookshelf/create' => 'bookshelf#create'
 
+  # 本棚検索
+  post 'bookshelf/shelfsearch' => 'bookshelf#shelfsearch'
+
   # 書籍編集ページ
   get ':shelfname/:isbn' => 'shelf#edit', constraints: { shelfname: /[^\/]+/, isbn: /\d{9}[\dX]/ }
   

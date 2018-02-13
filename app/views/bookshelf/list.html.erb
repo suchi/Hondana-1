@@ -130,8 +130,8 @@
 		<td width="1" bgcolor="#999999"></td>
 		<td width="5"></td>
 		<td valign="top">
-                  <% form_tag({:controller => 'bookshelf', :action => 'shelfsearch'}) do %>
-                    <h2>最近更新された本棚15 　　　　 本棚を探す  <%= text_field_tag 'q' %> <%= submit_tag '検索' %></h2>
+                  <%= form_tag({:controller => 'bookshelf', :action => 'shelfsearch'}) do %>
+                    <h2>最近更新された本棚15 　　　　 本棚を探す  <%= text_field_tag 'query' %> <%= submit_tag '検索' %></h2>
                   <% end %>
 		    <div id='listdiv'>
 		      <table id='listtable'>
