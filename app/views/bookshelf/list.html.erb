@@ -59,7 +59,7 @@
             <table width="100%">
               <tr>
                 <td align="center">
-                  <% form_tag({:action => 'create'}) do %>
+                  <%= form_tag({:action => 'create'}) do %>
 		    <% randno = rand(10000) %>
                     <!-- 蔵書、気になる本、共有の本棚、何でもどうぞ。--> 
 		    作成したい本棚の名前と登録番号 (<%= randno %>) を入力して「作成」ボタンを押すと本棚ができます。

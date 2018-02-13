@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get ':shelfname' => 'shelf#show', constraints: { shelfname: /[^\/]+/ } # ドットを含む本棚名を許す
   get ':shelfname/' => 'shelf#show', constraints: { shelfname: /[^\/]+/ }
 
+  # 本棚作成
+  post 'bookshelf/create' => 'bookshelf#create'
+
   # 書籍編集ページ
   get ':shelfname/:isbn' => 'shelf#edit', constraints: { shelfname: /[^\/]+/, isbn: /\d{9}[\dX]/ }
   
