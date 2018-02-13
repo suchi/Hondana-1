@@ -5,7 +5,8 @@ class BookshelfController < ApplicationController
       redirect_to :action => 'list'
       return
     else
-      books = Book.where("authors like ? or title like ?", "%#{query}%", "%#{query}%")
+      # 20件に限る
+      books = Book.where("authors like ? or title like ?", "%#{query}%", "%#{query}%").limit(20)
     end
 
     render locals: { query: query, books: books }
