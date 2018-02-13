@@ -18,9 +18,14 @@
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td align="right">
+            <%= form_tag ({:controller => 'bookshelf', :action => 'search'}) do %>
+            本を探す  <%= text_field_tag 'query' %> <%= submit_tag '本棚.orgで検索' %>
+            <% end %>
+	    <!--
             <form action=<%= url_for :controller => 'bookshelf', :action => 'search' %> method = 'get'>
-            本を探す  <input id="q" name="q" type="text" /> <input name="commit" type="submit" value="本棚.orgで検索" />
+            本を探す  <input id="query" name="query" type="text" /> <input name="commit" type="submit" value="本棚.orgで検索" />
             </form>
+	    -->
           </td>
           <td>
             <form method="GET" action="http://www.amazon.co.jp/exec/obidos/external-search/">
