@@ -62,11 +62,11 @@ $(function(){
 
 function showquiz(){
     if(use_iqauth && !authorized){
-        $('.bookinfo').css('display','none');
+        $('.hide_when_not_authorized').css('display','none');
         $('#quiztr').css('display','table-row');
     }
     else {
-        $('.bookinfo').css('display','table-row');
+        $('.hide_when_not_authorized').css('display','table-row');
         $('#quiztr').css('display','none');
     }
 }
@@ -171,7 +171,7 @@ function showquiz(){
         <tr>
           <td colspan="3"></td>
         </tr>
-        <tr>
+        <tr class="hide_when_not_authorized">
           <td id="deleteform">
             <%= form_tag({:action => 'delete', :isbn => book.isbn}) do %>
               <%= submit_tag "この本棚から削除" %>
