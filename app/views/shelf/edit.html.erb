@@ -9,9 +9,15 @@
 <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" %>
 
 <%= javascript_include_tag "/javascripts/md5.js" %>
-<!--  javascript_include_tag "/javascripts/iqauth.js" -->
+<%= javascript_include_tag "/javascripts/iqauth.js" %>
+<%= javascript_include_tag "/javascripts/showquiz.js" %>
 
 <!-- iqauth_js(@shelf,@book,@entry) -->
+<!--
+   puts "use_iqauth = #{shelf.use_iqauth}"
+   puts "quiz = #{shelf.quiz}"
+   puts "password = #{shelf.password}"
+-->
 
 <script type="text/javascript">
 var reload = function(){
@@ -20,6 +26,19 @@ var reload = function(){
     url: "<%= url_for :action => 'reload', :shelfname => shelf.name, :isbn => book.isbn %>"
   });
 }
+
+$(function(){
+    var iqauth = new IQAuth();
+    $('#quiz').append(queryDiv(iqauth));
+    queryDisplay(iqauth);
+
+    $('#quiz').on('mousedown', (event) => {
+        // 判定
+        // if iqauth.calcPassword() == 
+    });
+});
+
+
 </script>
 
 <div id="shelf_v">
@@ -111,8 +130,12 @@ var reload = function(){
           </tr>
 
 	  <!-- 認証ずみなら編集フォームを表示、そうでなければなぞなぞを表示 -->
-	  <%= render 'authedit', shelf: shelf, book: book, entry: entry %>
-	  
+          <% authorized = false %>
+          <% if authorized then %>
+            <%= render 'authedit', shelf: shelf, book: book, entry: entry %>
+          <% else %>
+            <tr><td id="quiz"></td></tr>
+          <% end %>
         </table>
       <% end %>
       <hr noshade size="1">

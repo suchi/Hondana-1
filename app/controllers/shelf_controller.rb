@@ -1,6 +1,32 @@
 class ShelfController < ApplicationController
 
   require 'amazon'
+
+  # ファイルの中のパスワードをDBにコピー
+  def testdb
+    dir = "/Users/masui/hondana.org/db/iqauth"
+    Dir.open(dir).each { |f|
+      if f =~ /^([0-9a-f]+)\.id$/ then
+        hash = $1
+        id = File.read("#{dir}/#{f}").chomp
+        if id =~ /^\d+$/
+          puts id
+          password = File.read("#{dir}/#{hash}.password").chomp
+          query = File.read("#{dir}/#{hash}.query").chomp
+          shelf = Shelf.where(id: id)[0]
+          if shelf then
+            puts shelf.password
+            puts shelf.quiz
+            puts "------"
+            shelf.password = password
+            shelf.quiz = query
+            puts "------"
+            shelf.save
+          end
+        end
+      end
+    }
+  end
   
   def show # 書籍リストを表示
     shelf = getshelf

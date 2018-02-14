@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   # match ':shelfname' => 'shelf#show', :via => :get
 
   root :to => 'bookshelf#list'
+
+  # ファイルの中のパスワードをDBにコピー
+  get 'testdb' => 'shelf#testdb'
   
   # 各本棚トップ
   # app/controllers/shelf_controller.rb

@@ -19,7 +19,6 @@
  * 2002/04/15: Bug fix about MD5 length.
  */
 
-
 //    md5_T[i] = parseInt(Math.abs(Math.sin(i)) * 4294967296.0);
 var MD5_T = new Array(0x00000000, 0xd76aa478, 0xe8c7b756, 0x242070db,
 		      0xc1bdceee, 0xf57c0faf, 0x4787c62a, 0xa8304613,
@@ -196,4 +195,10 @@ function MD5_hexhash(data) {
 	out += "0123456789abcdef".charAt(c & 0xf);
     }
     return out;
+}
+
+var isNode = (typeof process !== "undefined" && typeof require !== "undefined");
+
+if(isNode){
+    exports.MD5_hexhash = MD5_hexhash;
 }
