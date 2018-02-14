@@ -2,11 +2,18 @@ Rails.application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)' => 'welcome#index', :via => :get
   # match ':shelfname' => 'shelf#show', :via => :get
 
+  # resources :posts
+  #get 'atom' => 'bookshelf#atom'
+  
+  # resources :bookshelf
   root :to => 'bookshelf#list'
 
   # ファイルの中のパスワードとクイズを変換してをDBにコピー
   get 'convert_db' => 'shelf#convert_db'
-  
+
+  # ATOM
+  # get 'atom.xml' => 'bookshelf#atom'
+
   # 各本棚トップ
   # app/controllers/shelf_controller.rb
   # app/views/shelf/show.html.erb
@@ -68,4 +75,5 @@ Rails.application.routes.draw do
   match ':controller/:action', :via => :get
 
   # 詳細: http://guides.rubyonrails.org/routing.html
+
 end

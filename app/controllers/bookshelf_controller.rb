@@ -16,6 +16,12 @@ class BookshelfController < ApplicationController
     dispshelves = Shelf.limit(15).order("modtime DESC").where.not("name like '%_deleted%'")
     rand = Shelf.order("random()").limit(10) # .where.not("name like '%_deleted%'")
 
+    #@entries = Entry.limit(10).order("modtime DESC")
+    #respond_to do |format|
+    #  #format.atom
+    #  format.rss
+    #end
+
     render locals: { newentries: newentries, dispshelves: dispshelves, rand: rand }
   end
   
@@ -63,4 +69,18 @@ class BookshelfController < ApplicationController
       #end
     end
   end
+  
+  #def atom
+  #  render xml: {staus: 200, data: 200}
+  #end
+
+  #def atom
+  #  @posts = Entry.limit(10).order("modtime DESC")
+  #
+  #  respond_to do |format|
+  #    format.html
+  #    format.atom
+  #  end
+  #end
 end
+
