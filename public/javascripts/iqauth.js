@@ -23,7 +23,7 @@ if(isNode){
 
 class IQAuth {
     constructor(datastr){
-	if(!datastr){
+	if(datastr == "" || !datastr){
 	    // ミスで画像URLに空白が入ってる
 	    datastr =  '[\
               { "image": "http://gyazo.com/83183c7ee5d4b6ef1025543be0edac12.png", "answers": ["飯田","吉井","河野","矢島","森"] }, \

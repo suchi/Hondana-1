@@ -1,3 +1,6 @@
+//
+//  
+//
 var queryDiv = function(iqauth){ // 認証画面用のdiv
     var div = $('<div>').attr('id','whole');
     for(var i=0;i<iqauth.data.length;i++){

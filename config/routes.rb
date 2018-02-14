@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   root :to => 'bookshelf#list'
 
-  # ファイルの中のパスワードをDBにコピー
-  get 'testdb' => 'shelf#testdb'
+  # ファイルの中のパスワードとクイズを変換してをDBにコピー
+  get 'convert_db' => 'shelf#convert_db'
   
   # 各本棚トップ
   # app/controllers/shelf_controller.rb

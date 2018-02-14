@@ -1,5 +1,7 @@
 <%#
+
    書籍編集ページ
+
 %>
 
 <%= render 'header', shelf: shelf, entries: nil %>
@@ -15,14 +17,19 @@
 <!-- iqauth_js(@shelf,@book,@entry) -->
 <!--
    puts "use_iqauth = #{shelf.use_iqauth}"
-   puts "quiz = #{shelf.quiz}"
    puts "password = #{shelf.password}"
 -->
+<%=
+   puts "quiz = #{shelf.quiz}"
+   %>
 
 <script type="text/javascript">
 var use_iqauth = <%= shelf.use_iqauth == 1 ? true : false %>;
 var authorized = false;
 
+//
+// Amazonデータ再取得
+//
 var reload = function(){
   $.ajax({
     type: 'GET',
@@ -31,7 +38,16 @@ var reload = function(){
 }
 
 $(function(){
-    var iqauth = new IQAuth();
+    var quiz_json = '';
+    if(use_iqauth){
+        quiz_json = '<%= shelf.quiz %>'.
+            replace(/&amp;/g, '&').
+            replace(/&lt;/g, '<').
+            replace(/&gt;/g, '>').
+            replace(/&quot;/g, '"').
+            replace(/&apos;/g, "'");
+    }
+    var iqauth = new IQAuth(quiz_json);
     $('#quiz').append(queryDiv(iqauth));
     queryDisplay(iqauth);
 
