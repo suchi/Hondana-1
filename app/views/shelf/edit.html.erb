@@ -54,7 +54,7 @@ $(function(){
     showquiz();
 
     $('#quiz').on('mousedown', (event) => {
-        // 判定
+        // 認証できたか判定
         if(iqauth.calcPassword() == '<%= shelf.password %>') authorized = true;
         showquiz();
     });
@@ -104,10 +104,6 @@ function showquiz(){
               <a href='http://bookweb.kinokuniya.co.jp/guest/cgi-bin/wshosea.cgi?W-ISBN=<%= book.isbn %>'>紀伊國屋</a>,
               <a href='http://www.amazon.co.jp/exec/obidos/ASIN/<%= book.isbn %>/<%= affiliate_id %>/ref=nosim/'>Amazon</a>,
               <a href='http://webcatplus.nii.ac.jp/assoc.cgi?mode=equal0&isbn=<%= book.isbn %>'>WebCat</a>
-	      <!--
-              <a href='http://shinshomap.info/book/<%= book.isbn %>.html'>新書マップ</a>,
-              <a href='http://my.safaribooksonline.com/<%= book.isbn %>'>SafariBooks</a>
-	      -->
             </td>
           </tr>
           <tr>

@@ -4,7 +4,7 @@ class ShelfController < ApplicationController
 
   # ファイルの中のパスワードをDBにコピー
   def convert_db
-    dir = "/Users/masui/hondana.org/db/iqauth"
+    dir = "/Users/masui/hondana/db/iqauth"
     Dir.open(dir).each { |f|
       if f =~ /^([0-9a-f]+)\.id$/ then
         hash = $1
