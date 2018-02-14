@@ -20,6 +20,9 @@
 -->
 
 <script type="text/javascript">
+var use_iqauth = <%= shelf.use_iqauth == 1 ? true : false %>;
+var authorized = false;
+
 var reload = function(){
   $.ajax({
     type: 'GET',
@@ -32,12 +35,25 @@ $(function(){
     $('#quiz').append(queryDiv(iqauth));
     queryDisplay(iqauth);
 
+    showquiz();
+
     $('#quiz').on('mousedown', (event) => {
         // 判定
-        // if iqauth.calcPassword() == 
+        if(iqauth.calcPassword() == '<%= shelf.password %>') authorized = true;
+        showquiz();
     });
 });
 
+function showquiz(){
+    if(use_iqauth && !authorized){
+        $('.bookinfo').css('display','none');
+        $('#quiztr').css('display','table-row');
+    }
+    else {
+        $('.bookinfo').css('display','table-row');
+        $('#quiztr').css('display','none');
+    }
+}
 
 </script>
 
@@ -130,12 +146,8 @@ $(function(){
           </tr>
 
 	  <!-- 認証ずみなら編集フォームを表示、そうでなければなぞなぞを表示 -->
-          <% authorized = false %>
-          <% if authorized then %>
-            <%= render 'authedit', shelf: shelf, book: book, entry: entry %>
-          <% else %>
-            <tr><td id="quiz"></td></tr>
-          <% end %>
+          <%= render 'authedit', shelf: shelf, book: book, entry: entry %>
+          <tr id="quiztr"><td id="quiz"></td></tr>
         </table>
       <% end %>
       <hr noshade size="1">
