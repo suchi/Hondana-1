@@ -55,6 +55,7 @@ Rails.application.routes.draw do
 
   # 新規登録
   post ':shelfname/add' => 'shelf#add', constraints: { shelfname: /[^\/]+/ }
+  get ':shelfname/add' => 'shelf#add', constraints: { shelfname: /[^\/]+/ }
 
   # 書込み
   post ':shelfname/write' => 'shelf#write', constraints: { shelfname: /[^\/]+/ }
