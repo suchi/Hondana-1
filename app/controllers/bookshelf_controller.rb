@@ -39,7 +39,7 @@ class BookshelfController < ApplicationController
     shelfname = params[:shelfname]
     challenge = params[:challenge]
     response = params[:response]
-    if challenge.to_i + 1 != response.to_i then
+    if Math.sqrt(challenge.to_i).floor != response.to_i then
       redirect_to :action => 'list'
     else
       #if shelfname == '' || shelfname.index('<') || shelfname =~ /%3c/i ||
