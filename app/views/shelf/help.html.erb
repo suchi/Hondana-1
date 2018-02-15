@@ -69,7 +69,7 @@
 	  他の本棚の書籍情報編集ページまたはAmazonのページでこのブックマークを選択することにより、
 	  書籍情報を自分の本棚に登録することができます。
 	  <br>
-	  <code>javascript:(function(){var%20src=document.location.href;re=new RegExp('(product|ASIN|dp)/([0-9]{9}[0-9X])');if(src.match(re)){void(window.open('http://hondana.org/<%= CGI.escape(shelf.name) %>/add?isbns='+RegExp.$2));}else {re=new%20RegExp('hondana.org/.*/([0-9]{9}[0-9X])');if(src.match(re)){void(window.open('http://hondana.org/<%= CGI.escape(shelf.name) %>/add?isbns='+RegExp.$1));}}})();</code>
+	  <code>javascript:(function(){var%20src=document.location.href;re=new RegExp('(product|ASIN|dp)/([0-9]{9}[0-9X])');if(src.match(re)){void(window.open('http://hondana.org/<%= CGI.escape(shelf.name) %>/add?isbns='+RegExp.$2));}else%20{re=new%20RegExp('hondana.org/.*/([0-9]{9}[0-9X])');if(src.match(re)){void(window.open('http://hondana.org/<%= CGI.escape(shelf.name) %>/add?isbns='+RegExp.$1));}}})();</code>
 	  <br>
         <!--
 	<li>デフォルト本棚設定</li>
