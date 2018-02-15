@@ -62,9 +62,9 @@
                   <%= form_tag({:action => 'create'}) do %>
 		    <% randno = rand(10000) %>
                     <!-- 蔵書、気になる本、共有の本棚、何でもどうぞ。--> 
-		    作成したい本棚の名前と登録番号 (<%= randno %>) を入力して「作成」ボタンを押すと本棚ができます。
+		    本棚の名前と、<%= randno %> に 1 を足した数を入力してから「作成」ボタンを押すと本棚ができます。
                     <%= text_field_tag 'shelfname', '', :placeholder => '本棚名', :size => 12 %>
-                    <%= text_field_tag 'response', '', :placeholder => randno, :size => 4 %>
+                    <%= text_field_tag 'response', '', :placeholder => '数字', :size => 6 %>
                     <%= hidden_field_tag 'challenge', randno %>
 		    <%= submit_tag '作成' %>
                   <% end %>

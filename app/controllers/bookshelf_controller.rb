@@ -35,12 +35,11 @@ class BookshelfController < ApplicationController
   end
   
   def create
-    # redirect_to :action => 'list'
+    # redirect_to :action => 'list' # 本棚作成を許さない場合
     shelfname = params[:shelfname]
     challenge = params[:challenge]
     response = params[:response]
-    puts "shelfname=#{shelfname}, challenge=#{challenge}, response=#{response}"
-    if challenge != response then
+    if challenge.to_i + 1 != response.to_i then
       redirect_to :action => 'list'
     else
       #if shelfname == '' || shelfname.index('<') || shelfname =~ /%3c/i ||
