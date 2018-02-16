@@ -74,6 +74,7 @@ class ShelfController < ApplicationController
     shelf.save
     
     redirect_to :action => 'edit', :shelfname => shelf.name, :isbn => book.isbn
+    return
   end
 
   def newbooks
@@ -366,7 +367,6 @@ class ShelfController < ApplicationController
 #    end
 #    redirect_to :action => 'show', :shelfname => @newname
   end
-
   
   def category
     shelf = getshelf
@@ -396,6 +396,7 @@ class ShelfController < ApplicationController
     puts params[:quiz]
     
     redirect_to :action => 'profile_edit'
+    return
   end
 
   private
