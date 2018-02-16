@@ -21,11 +21,22 @@ function init(shelf,quiz,use_password,password_digest){
     else {
 	display();
     }
+
+    $('#content').on('mousedown',(event) => {
+	for(var qno=0; qno<iqauth.data.length; qno++){
+	    var src = $(`#imageurl${qno}`).val();
+	    iqauth.data[qno].image = src;
+	    $(`#image${qno}`).attr('src',src);
+	    for(var ano=0; ano<iqauth.data[qno].answers.length; ano++){
+		iqauth.data[qno].answers[ano] = $(`#answer${qno}_${ano}`).attr('value');
+	    }
+	}
+    });
 }
 
 function display(){
     $('#content').empty();
-    $('#content').append($('<h2>問題登録</h2> \
+    $('#content').append($('<h3>問題登録</h3> \
     <ul> \
       <li>画像認証用の画像と問題を登録して下さい \
       <li>編集し終わったら、正答を選択してから<input type="button" onclick="check();" value="確認" style="font-size:20pt;">ボタンを押して下さい \
@@ -61,7 +72,7 @@ function check(){
     password1= iqauth.calcPassword(answers);
     checking = true;
     $('#content').empty();
-    $('#content').append($('<h2>問題確認</h2> \
+    $('#content').append($('<h3>問題確認</h3> \
     <ul> \
       <li>登録画面で選んだ正答を選択して<input type="button" onclick="finalcheck();" value="最終確認" style="font-size:20pt;">ボタンを押して下さい \
     </ul> \
@@ -75,7 +86,7 @@ function check(){
 function login(){
     checking = true;
     $('#content').empty();
-    $('#content').append($('<h2>認証</h2> \
+    $('#content').append($('<h3>認証</h3> \
     <ul> \
       <li>正答を選択して<input type="button" onclick="logincheck();" value="認証" style="font-size:20pt;">ボタンを押して下さい \
     </ul> \
@@ -158,7 +169,8 @@ function questionElement(qno){
 	    css('vertical-align','middle').
 	    css('width','90%').
 	    css('border','none').
-	    attr('value',iqauth.data[qno].image);
+	    attr('value',iqauth.data[qno].image).
+	    attr('id',`imageurl${qno}`);
     if(checking) imagetext.attr('readonly',true);
     return $('<div>').
 	css('background-color','#fff').
@@ -169,7 +181,6 @@ function questionElement(qno){
 	css('padding','1px').
 	css('margin','0 0 2 2').
 	css('vertical-align','middle').
-	attr('id',`imageurl${qno}`).
 	append(imagetext).
 	append($('<div>').
 	       css('float','left').
