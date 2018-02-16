@@ -68,6 +68,13 @@ class BookshelfController < ApplicationController
       #end
     end
   end
+
+  def atom
+    # 意味わからないが、こういうの用意すると views/bookshelf/atom.xml.erb が使える
+    respond_to do |format|
+      format.xml
+    end
+  end
   
   #def atom
   #  render xml: {staus: 200, data: 200}

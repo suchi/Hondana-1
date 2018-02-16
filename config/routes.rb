@@ -2,12 +2,12 @@ Rails.application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)' => 'welcome#index', :via => :get
   # match ':shelfname' => 'shelf#show', :via => :get
 
-  # resources :posts
-  #get 'atom' => 'bookshelf#atom'
-  
   # resources :bookshelf
   root :to => 'bookshelf#list'
 
+  # resources :posts
+  get 'atom.xml' => 'bookshelf#atom'
+  
   # # ファイルの中のパスワードとクイズを変換してをDBにコピー (旧本棚からの移行時のみ利用)
   # get 'convert_db' => 'shelf#convert_db'
 
