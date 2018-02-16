@@ -1,0 +1,21 @@
+<%= render 'header', shelf: shelf, entries: nil %>
+
+<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" %>
+
+<%= javascript_include_tag "/javascripts/md5.js" %>
+<%= javascript_include_tag "/javascripts/iqauth.js" %>
+<%= javascript_include_tag "/javascripts/composequiz.js" %>
+
+<%=
+   puts "quiz = #{shelf.quiz}"
+   %>
+
+<script type="text/javascript">
+  $(function() {
+     init('<%= shelf.name %>', '<%= shelf.quiz.html_safe %>');
+  });
+</script>
+
+<div id="content" style="padding:10px;"></div>
+
+<%= render 'footer', entries: nil %>

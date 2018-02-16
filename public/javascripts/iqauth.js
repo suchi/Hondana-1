@@ -24,15 +24,12 @@ if(isNode){
 class IQAuth {
     constructor(datastr){
 	if(datastr == "" || !datastr){
-	    // ミスで画像URLに空白が入ってる
-	    datastr =  '[\
-              { "image": "http://gyazo.com/83183c7ee5d4b6ef1025543be0edac12.png", "answers": ["飯田","吉井","河野","矢島","森"] }, \
-              { "image": "http://gyazo.com/2098531d933bf982c43385756b48ea11.png", "answers": ["的場","菊地","川原","田島","高橋"] }, \
-              { "image": "http://gyazo.com/3caf4c0c5cc727d06c8c330196eba7f1.png ", "answers": ["Icebird","Adventure","Mermaid","Endurance","Seeker"] }, \
-              { "image": "http://gyazo.com/ca3d248e15e7806c3fcfbbe19acafab5.png", "answers": ["Eric","Alejandro","Luna","Todd","Hebert"] }, \
-              { "image": "http://gyazo.com/700c6447ab10cf408146e3740a92feb0.png", "answers": ["妹尾","河口","酒田","川島","安斎"] } \
-          ]';
+	    datastr = '[\
+	      { "image": "https://gyazo.com/3400304da862eae646012b0fb2694276.jpg", "answers": ["大崎公園","披露山公園","源氏山公園","しおさい公園","城ヶ島公園"] }, \
+	      { "image": "https://gyazo.com/f2ce69660fa1b635198ea191bece1191.jpg", "answers": ["真鶴","逗子","熱海","下田","伊東"] } \
+	    ]';
 	}
+	
 	this.data = JSON.parse(datastr);
 	this.answers = [];
 	for(var i=0; i<this.data.length; i++){

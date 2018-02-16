@@ -8,7 +8,7 @@ h1     {
 	margin: 0;
 	padding: 0 0 0 2mm;
 }
-h2   { font-size: medium; font-weight: normal; margin: 0; padding: 0 }
+/* h2   { font-size: medium; font-weight: normal; margin: 0; padding: 0 } */
 .description { /* font-size: small; */ padding-left: 4mm }
 #container  { margin: 0; padding: 0 }
 #home_header { background-image: url("../images/logo_top.jpg"); background-repeat: no-repeat; margin: 0; padding: 0; width: 100%; height: 64px }

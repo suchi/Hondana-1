@@ -27,12 +27,8 @@ class ShelfController < ApplicationController
           quiz = data.to_json
 
           if shelf then
-            puts shelf.password
-            puts shelf.quiz
-            puts "------"
             shelf.password = password
             shelf.quiz = quiz
-            puts "------"
             shelf.save
           end
         end
@@ -384,6 +380,22 @@ class ShelfController < ApplicationController
       }
     }
     render locals: { shelf: shelf, categories: categories.to_a.sort }
+  end
+
+  def editquiz
+    shelf = getshelf
+    
+    render locals: { shelf: shelf }
+  end
+
+  def registerquiz
+    shelf = getshelf
+
+    puts shelf.name
+    puts params[:pass]
+    puts params[:quiz]
+    
+    redirect_to :action => 'profile_edit'
   end
 
   private

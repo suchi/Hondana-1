@@ -31,7 +31,7 @@
 	  </td>
           <td>
 	    <%= check_box_tag "shelf[use_iqauth]", 1, checked = (shelf.use_iqauth.to_s != '1' ? false : true) %>
-	    <%= link_to '認証問題作成', {:controller => 'iqauth', :action => 'create', :id => shelf.id} %>が必要です
+	    <%= link_to '認証問題作成', {:action => 'editquiz', :shelfname => shelf.name } %>が必要です
           </td>
         </tr>
       </table>

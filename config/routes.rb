@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   # resources :bookshelf
   root :to => 'bookshelf#list'
 
-  # ファイルの中のパスワードとクイズを変換してをDBにコピー
-  get 'convert_db' => 'shelf#convert_db'
+  # # ファイルの中のパスワードとクイズを変換してをDBにコピー (旧本棚からの移行時のみ利用)
+  # get 'convert_db' => 'shelf#convert_db'
 
   # ATOM
   # get 'atom.xml' => 'bookshelf#atom'
@@ -59,6 +59,12 @@ Rails.application.routes.draw do
 
   # 書込み
   post ':shelfname/write' => 'shelf#write', constraints: { shelfname: /[^\/]+/ }
+
+  # なぞなぞ問題編集
+  get ':shelfname/editquiz' => 'shelf#editquiz', constraints: { shelfname: /[^\/]+/ }
+
+  # なぞなぞ問題登録
+  post ':shelfname/registerquiz' => 'shelf#registerquiz', constraints: { shelfname: /[^\/]+/ }
 
   # 検索
   post 'bookshelf/search' => 'bookshelf#search'
