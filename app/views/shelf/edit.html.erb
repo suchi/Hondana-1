@@ -47,7 +47,7 @@ $(function(){
     $('#quiz').on('mousedown', (event) => {
         // 認証できたか判定
         // **** こんな細工をしてもブルートフォースすれば計算できてしまうから無意味かな?
-        if(MD5_hexhash(iqauth.calcPassword()) == '<%= Digest::MD5.hexdigest(shelf.password) %>') authorized = true;
+        if(MD5_hexhash(iqauth.calcPassword()) == '<%= Digest::MD5.hexdigest(shelf.password.to_s) %>') authorized = true;
         showquiz();
     });
 });
