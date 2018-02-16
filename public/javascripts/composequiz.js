@@ -4,14 +4,23 @@
 var answers = [];
 var password1 = ''; // 登録後計算
 var password2 = ''; // チェック時計算
+var current_password_digest = '';
 var iqauth = null;
 var shelfname = '';
 var checking = false;
+var loginok = true;
 
-function init(shelf,quiz){
+function init(shelf,quiz,use_password,password_digest){
     shelfname = shelf;
     iqauth = new IQAuth(quiz);
-    display();
+
+    if(use_password){
+	current_password_digest = password_digest;
+	login();
+    }
+    else {
+	display();
+    }
 }
 
 function display(){
@@ -63,6 +72,27 @@ function check(){
     }
 }
 
+function login(){
+    checking = true;
+    $('#content').empty();
+    $('#content').append($('<h2>認証</h2> \
+    <ul> \
+      <li>正答を選択して<input type="button" onclick="logincheck();" value="認証" style="font-size:20pt;">ボタンを押して下さい \
+    </ul> \
+    '));
+    for(var qno=0;qno<iqauth.data.length;qno++){
+	answers[qno] = "0";
+	$('#content').append(oneQuestion(qno));
+    }
+}
+
+function logincheck(){
+    password = iqauth.calcPassword(answers);
+    if(MD5_hexhash(password) == current_password_digest){
+	display();
+    }
+}
+
 function finalcheck(){
     password2 = iqauth.calcPassword(answers);
     if(password1 == password2){
@@ -75,7 +105,7 @@ function finalcheck(){
 		    'pass': password1,
 		    'quiz': JSON.stringify(iqauth.data)
 		}
-	    })
+	    });
 	    alert('なぞなぞ問題を登録しました');
 	}
     }

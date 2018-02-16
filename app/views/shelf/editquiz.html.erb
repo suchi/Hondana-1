@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
   $(function() {
-     init('<%= shelf.name %>', '<%= shelf.quiz.html_safe %>');
+    init('<%= shelf.name %>', '<%= shelf.quiz.html_safe %>', <%= shelf.use_iqauth.to_s == '1' ? true : false %>, '<%= Digest::MD5.hexdigest(shelf.password.to_s) %>');
   });
 </script>
 

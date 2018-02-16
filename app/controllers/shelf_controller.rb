@@ -391,9 +391,9 @@ class ShelfController < ApplicationController
   def registerquiz
     shelf = getshelf
 
-    puts shelf.name
-    puts params[:pass]
-    puts params[:quiz]
+    shelf.quiz = params[:quiz]
+    shelf.password = params[:pass]
+    shelf.save
     
     redirect_to :action => 'profile_edit'
     return
