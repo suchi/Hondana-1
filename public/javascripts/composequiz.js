@@ -89,6 +89,7 @@ function login(){
 function logincheck(){
     password = iqauth.calcPassword(answers);
     if(MD5_hexhash(password) == current_password_digest){
+	checking = false;
 	display();
     }
 }
