@@ -51,8 +51,8 @@ EOF
   end
 
   def Atom.atom
-    out = ''
-    out = Atom.xmlhead + "\n\n"
+    out = []
+    out << Atom.xmlhead
     
     headparams = {}
     headparams['title'] = '本棚.org'
@@ -64,11 +64,11 @@ EOF
     headparams['updated'] = Time.now
     headparams['modified'] = Time.now
     
-    out += <<EOF
+    out << <<EOF
 <feed xmlns="http://www.w3.org/2005/Atom">
 EOF
     
-    out += Atom.head(headparams)
+    out << Atom.head(headparams)
     
     newentries = Entry.limit(20).order("modtime DESC")
     newentries[0..20].each { |entry|
@@ -76,13 +76,11 @@ EOF
       book = entry.book
       
       entryparams = {}
-      s = book.title.to_s
-      s.gsub!(/\&/,"&amp;")
-      s.gsub!(/"/,"&quot;")
-      s.gsub!(/</,"&lt;")
-      s.gsub!(/>/,"&gt;")
-      entryparams['title'] = s
-      
+      entryparams['title'] = book.title.to_s.
+                             gsub(/\&/,"&amp;").
+                             gsub(/"/,"&quot;").
+                             gsub(/</,"&lt;").
+                             gsub(/>/,"&gt;")
       entryparams['link'] = "/#{shelf.name}/#{book.isbn}"
       entryparams['id'] = "tag:hondana.org,2005:#{shelf.id}-#{book.isbn}"
       entryparams['published'] = book.modtime
@@ -90,20 +88,19 @@ EOF
       entryparams['issued'] = book.modtime
       entryparams['updated'] = book.modtime
       entryparams['category'] = 'Books'
-      s = entry.comment.to_s
-      s.gsub!(/[\r\n]/,'')
-      s.gsub!(/\&/,"&amp;")
-      s.gsub!(/"/,"&quot;")
-      s.gsub!(/</,"&lt;")
-      s.gsub!(/>/,"&gt;")
-      entryparams['summary'] = s
+      entryparams['summary'] = entry.comment.to_s.
+                               gsub(/[\r\n]/,'').
+                               gsub(/\&/,"&amp;").
+                               gsub(/"/,"&quot;").
+                               gsub(/</,"&lt;").
+                               gsub(/>/,"&gt;")
       entryparams['image'] = book.imageurl
-      out += Atom.entry(entryparams)
+      out << Atom.entry(entryparams)
     }
     
-    out += <<EOF
+    out << <<EOF
 </feed>
 EOF
-    out
+    out.join("\n")
   end
 end
