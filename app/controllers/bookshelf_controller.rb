@@ -39,7 +39,7 @@ class BookshelfController < ApplicationController
     shelfname = params[:shelfname]
     challenge = params[:challenge]
     response = params[:response]
-    if Math.sqrt(challenge.to_i).floor != response.to_i then
+    if Math.sqrt(challenge.to_i).floor != response.to_i then # 平方根認証!
       redirect_to :action => 'list'
     else
       #if shelfname == '' || shelfname.index('<') || shelfname =~ /%3c/i ||
