@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   # match ':shelfname' => 'shelf#show', :via => :get
 
   # atom
-  get 'atom.xml' => 'bookshelf#atom'
+  match 'atom.xml' => 'bookshelf#atom', :via => :get
+  # get 'atom.xml' => 'bookshelf#atom'
   
   # resources :bookshelf
   root :to => 'bookshelf#list'
