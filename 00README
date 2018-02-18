@@ -19,3 +19,6 @@ Herokuにコピー
 
 デバッグ出力
  logger.debug "write: shelfname=#{params[:shelfname]}, isbn=#{params[:isbn]}"
+
+Bundlerのバージョン指定
+  bundle _1.15.2_

@@ -140,6 +140,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    scout_apm (2.4.8)
     selenium-webdriver (3.9.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
@@ -193,6 +194,7 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.1.4)
   sass-rails (~> 5.0)
+  scout_apm
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)

@@ -63,3 +63,6 @@ gem 'will_paginate'
 gem 'amazon-ecs'
 
 gem 'json'
+
+gem 'scout_apm'
+
