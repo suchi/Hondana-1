@@ -75,18 +75,5 @@ class BookshelfController < ApplicationController
       format.xml
     end
   end
-  
-  #def atom
-  #  render xml: {staus: 200, data: 200}
-  #end
-
-  #def atom
-  #  @posts = Entry.limit(10).order("modtime DESC")
-  #
-  #  respond_to do |format|
-  #    format.html
-  #    format.atom
-  #  end
-  #end
 end
 

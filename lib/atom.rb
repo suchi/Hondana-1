@@ -10,7 +10,7 @@ class Atom
   def Atom.xmlhead
     <<EOF
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<?xml-stylesheet href="http://www.blogger.com/styles/atom.css" type="text/css"?>
+<?xml-stylesheet href="https://www.blogger.com/styles/atom.css" type="text/css"?>
 EOF
   end
 
