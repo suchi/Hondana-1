@@ -101,6 +101,6 @@ EOF
     out << <<EOF
 </feed>
 EOF
-    out.join("\n")
+    out.join
   end
 end
