@@ -7,6 +7,7 @@ class BookshelfController < ApplicationController
     else
       # 100件に限る
       books = Book.where("authors like ? or title like ?", "%#{query}%", "%#{query}%").limit(100)
+      # コメントの中も検索したいかも
     end
     render locals: { query: query, books: books }
   end
@@ -15,12 +16,6 @@ class BookshelfController < ApplicationController
     newentries = Entry.limit(10).where.not(:comment => "").order("modtime DESC") # _deletedな本棚の本も見えてしまう? まぁ良いか??
     dispshelves = Shelf.limit(15).order("modtime DESC").where.not("name like '%_deleted%'")
     rand = Shelf.order("random()").limit(10) # .where.not("name like '%_deleted%'")
-
-    #@entries = Entry.limit(10).order("modtime DESC")
-    #respond_to do |format|
-    #  #format.atom
-    #  format.rss
-    #end
 
     render locals: { newentries: newentries, dispshelves: dispshelves, rand: rand }
   end
