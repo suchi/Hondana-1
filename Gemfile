@@ -66,3 +66,5 @@ gem 'json'
 
 gem 'scout_apm'
 
+gem 'rack-attack'
+
