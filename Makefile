@@ -7,3 +7,7 @@ run:
 
 restart:
 	heroku restart -a hondana-heroku
+
+stop:
+	heroku ps:scale web=0 -a hondana-heroku
+#	heroku ps:scale web=1 -a hondana-heroku
