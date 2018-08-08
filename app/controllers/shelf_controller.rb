@@ -176,7 +176,8 @@ class ShelfController < ApplicationController
     shelf.url = url
     shelf.affiliateid = affiliateid
     shelf.use_iqauth = (params[:shelf][:use_iqauth].to_s == '1' ? '1' : '0')
-    shelf.save
+
+    # shelf.save # 編集を許さない
 
     #if description !~ /href=/i then
     #  # 単純なタグだけ許す細工

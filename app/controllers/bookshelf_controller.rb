@@ -30,7 +30,8 @@ class BookshelfController < ApplicationController
   end
   
   def create
-    # redirect_to :action => 'list' # 本棚作成を許さない場合
+    redirect_to :action => 'list' # 本棚作成を許さない場合
+
     shelfname = params[:shelfname]
     challenge = params[:challenge]
     response = params[:response]
