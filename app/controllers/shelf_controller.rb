@@ -344,7 +344,7 @@ class ShelfController < ApplicationController
 
     shelf.name = newname # 本棚名変更!!
     shelf.modtime = Time.now
-    # shelf.save 本棚名変更を禁止 2018/8/8
+    shelf.save # 本棚名変更を有効に戻す 2018/8/11
 
     if newname =~ /_deleted/ then
       redirect_to :controller => 'bookshelf', :action => 'list'
