@@ -67,11 +67,13 @@ class ShelfController < ApplicationController
     entry.score = params[:entry][:score]
     entry.categories = params[:entry][:categories].sub(/\s*$/,'')
     entry.comment = params[:entry][:comment]
-    entry.modtime = Time.now
-    entry.clicktime = Time.now
-    entry.save
-    shelf.modtime = Time.now
-    shelf.save
+    if entry.comment !~ /freeslots/ then ### spam
+      entry.modtime = Time.now
+      entry.clicktime = Time.now
+      entry.save
+      shelf.modtime = Time.now
+      shelf.save
+    end
     
     redirect_to :action => 'edit', :shelfname => shelf.name, :isbn => book.isbn
     return
