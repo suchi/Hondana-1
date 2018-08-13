@@ -67,7 +67,7 @@ class ShelfController < ApplicationController
     entry.score = params[:entry][:score]
     entry.categories = params[:entry][:categories].sub(/\s*$/,'')
     entry.comment = params[:entry][:comment]
-    if entry.comment !~ /freeslots/ then ### spam
+    if entry.comment !~ /a href/ then ### spam
       entry.modtime = Time.now
       entry.clicktime = Time.now
       entry.save
