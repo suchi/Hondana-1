@@ -30,22 +30,23 @@ class BookshelfController < ApplicationController
   end
   
   def create
-    redirect_to :action => 'list' # 本棚作成を許さない場合
+    # redirect_to :action => 'list' # 本棚作成を許さない場合
 
     shelfname = params[:shelfname]
     challenge = params[:challenge]
     response = params[:response]
-    if Math.sqrt(challenge.to_i).floor != response.to_i then # 平方根認証!
+    ansmd5 = params[:ansmd5]
+
+    #File.open("/tmp/log","w"){ |f|
+    #  f.puts response
+    #  f.puts ansmd5
+    #}
+
+    require "digest/md5"
+    #if Math.sqrt(challenge.to_i).floor != response.to_i then # 平方根認証
+    if Digest::MD5.hexdigest(response) != ansmd5 then
       redirect_to :action => 'list'
     else
-      #if shelfname == '' || shelfname.index('<') || shelfname =~ /%3c/i ||
-      #    shelfname =~ /^[\d\w]{32}$/ ||
-      #    shelfname =~ /Ita7ef/ ||
-      #    (shelfname =~ /^[\d\w]{16}$/ && shelfname =~ /[a-z]/ && shelfname =~ /[A-Z]/) ||
-      #    cookies[:List] != 'Hondana' ||
-      #    cookies[:Hondana] != 'xxxx' then
-      #  redirect_to :action => 'list'
-      #else
       shelf = Shelf.where(name: shelfname)[0]
       if shelf.nil? then
         shelf = Shelf.new
@@ -61,7 +62,6 @@ class BookshelfController < ApplicationController
         shelf.save
       end
       redirect_to :controller => 'shelf', :action => 'show', :shelfname => shelfname
-      #end
     end
   end
 
