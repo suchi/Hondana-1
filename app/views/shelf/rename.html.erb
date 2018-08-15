@@ -15,9 +15,17 @@
         <% if params[:error].to_s != '' then%>
           <br/><font color='red'><%= params[:error] %></font><br/>
         <% end %>
+	<% require 'joushiki' %>
+	<% (quiz, ansmd5) = get_joushiki() %>
+	新しい本棚名と、「<%= quiz %>」 の■に入る文字を入力して「本棚名変更/消去」ボタンを押してください。<br/>
+	<!--
         新しい本棚名を入力してボタンを押してください。<br/>
-        空白のまま書き込むと「<%= shelf.name %>の本棚」が消去されます。<br/><br/>
-        <%= text_field 'shelf', 'name', :size => 30 %><%= submit_tag "本棚名変更/消去" %>
+	  -->
+        空白を指定すると「<%= shelf.name %>の本棚」が消去されます。<br/><br/>
+        <%= text_field 'shelf', 'name', :placeholder => '新しい本棚名', :size => 30 %>
+        <%= text_field_tag 'response', '', :placeholder => '回答', :size => 7 %>
+	<%= submit_tag "本棚名変更/消去" %>
+        <%= hidden_field_tag 'ansmd5', ansmd5 %>
       <% end %>
     </div>
     <div class="shelf_h"><%= image_tag "/images/fms.gif", :class => "fms" %></div>

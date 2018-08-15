@@ -313,6 +313,8 @@ class ShelfController < ApplicationController
   def setname
     shelf = getshelf
     newname = params[:shelf][:name]
+    response = params[:response]
+    ansmd5 = params[:ansmd5]
 
     # # spam対策のため、!! を最後につけたときだけ名前変更を許す
     # if newname !~ /!!$/ then
@@ -320,6 +322,11 @@ class ShelfController < ApplicationController
     #   return
     # end
     # newname.sub!(/!!$/,'')
+
+    require "digest/md5"
+    if Digest::MD5.hexdigest(response) != ansmd5 then
+      redirect_to :action => 'list'
+    end
 
     if newname.index('<') || newname =~ /%3c/i then # 変な名前を許さない
       redirect_to :action => 'show', :shelfname => shelf.name
@@ -346,7 +353,7 @@ class ShelfController < ApplicationController
 
     shelf.name = newname # 本棚名変更!!
     shelf.modtime = Time.now
-    # shelf.save # 本棚名変更を有効に戻す 2018/8/11 やっぱり駄目 2018/8/15
+    shelf.save # 本棚名変更を有効に戻す 2018/8/11
 
     if newname =~ /_deleted/ then
       redirect_to :controller => 'bookshelf', :action => 'list'

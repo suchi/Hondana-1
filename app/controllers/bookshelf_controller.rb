@@ -37,11 +37,6 @@ class BookshelfController < ApplicationController
     response = params[:response]
     ansmd5 = params[:ansmd5]
 
-    #File.open("/tmp/log","w"){ |f|
-    #  f.puts response
-    #  f.puts ansmd5
-    #}
-
     require "digest/md5"
     #if Math.sqrt(challenge.to_i).floor != response.to_i then # 平方根認証
     if Digest::MD5.hexdigest(response) != ansmd5 then
