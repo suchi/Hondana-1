@@ -31,6 +31,10 @@ class BookshelfController < ApplicationController
   
   def create
     # redirect_to :action => 'list' # 本棚作成を許さない場合
+    if !verified_request? # これは必要??
+      redirect_to :controller => 'bookshelf', :action => 'list'
+      return
+    end
 
     shelfname = params[:shelfname]
     challenge = params[:challenge]

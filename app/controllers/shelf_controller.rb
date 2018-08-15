@@ -316,6 +316,13 @@ class ShelfController < ApplicationController
     response = params[:response]
     ansmd5 = params[:ansmd5]
 
+    puts "AUTH_TOKEN = #{params[:authenticity_token]}"
+    puts "VERIFIED = #{verified_request?}"
+    if !verified_request? # これは必要??
+      redirect_to :controller => 'bookshelf', :action => 'list'
+      return
+    end
+
     # # spam対策のため、!! を最後につけたときだけ名前変更を許す
     # if newname !~ /!!$/ then
     #   redirect_to :action => 'show', :shelfname => @shelf.name
@@ -323,9 +330,11 @@ class ShelfController < ApplicationController
     # end
     # newname.sub!(/!!$/,'')
 
+
     require "digest/md5"
     if Digest::MD5.hexdigest(response) != ansmd5 then
-      redirect_to :action => 'list'
+      redirect_to :controller => 'bookshelf', :action => 'list'
+      return
     end
 
     if newname.index('<') || newname =~ /%3c/i then # 変な名前を許さない
