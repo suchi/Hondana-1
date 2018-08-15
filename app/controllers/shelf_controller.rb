@@ -326,7 +326,7 @@ class ShelfController < ApplicationController
       return
     end
 
-    #return # SPAM対策するときはここでリターンしてしまう
+    # return # SPAM対策するときはここでリターンしてしまう
 
     puts "newname = #{newname}"
     if newname == '' then
@@ -346,7 +346,7 @@ class ShelfController < ApplicationController
 
     shelf.name = newname # 本棚名変更!!
     shelf.modtime = Time.now
-    shelf.save # 本棚名変更を有効に戻す 2018/8/11
+    # shelf.save # 本棚名変更を有効に戻す 2018/8/11 やっぱり駄目 2018/8/15
 
     if newname =~ /_deleted/ then
       redirect_to :controller => 'bookshelf', :action => 'list'
