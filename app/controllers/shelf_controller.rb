@@ -319,21 +319,22 @@ class ShelfController < ApplicationController
     puts "AUTH_TOKEN = #{params[:authenticity_token]}"
     puts "VERIFIED = #{verified_request?}"
     if !verified_request? # これは必要??
-      redirect_to :controller => 'bookshelf', :action => 'list'
+      # redirect_to :controller => 'bookshelf', :action => 'list'
+      redirect_to :action => 'show', :shelfname => shelf.name
       return
     end
 
-    # # spam対策のため、!! を最後につけたときだけ名前変更を許す
-    # if newname !~ /!!$/ then
-    #   redirect_to :action => 'show', :shelfname => @shelf.name
-    #   return
-    # end
-    # newname.sub!(/!!$/,'')
-
+    # spam対策のため、!! を最後につけたときだけ名前変更を許す
+    if newname !~ /!!$/ then
+      redirect_to :action => 'show', :shelfname => shelf.name
+      return
+    end
+    newname.sub!(/!!$/,'')
 
     require "digest/md5"
     if Digest::MD5.hexdigest(response) != ansmd5 then
-      redirect_to :controller => 'bookshelf', :action => 'list'
+      # redirect_to :controller => 'bookshelf', :action => 'list'
+      redirect_to :action => 'show', :shelfname => shelf.name
       return
     end
 
