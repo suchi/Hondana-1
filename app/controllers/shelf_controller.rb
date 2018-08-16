@@ -169,6 +169,9 @@ class ShelfController < ApplicationController
   def profile_write
     shelf = getshelf
 
+    puts "AUTH_TOKEN = #{params[:authenticity_token]}"
+    puts "VERIFIED = #{verified_request?}"
+    
     # if cookies[:CurrentShelf] == @shelf.name then
     description = params[:shelf][:description]
     affiliateid = params[:shelf][:affiliateid]
@@ -334,6 +337,7 @@ class ShelfController < ApplicationController
     end
 
     # spam対策のため、!! を最後につけたときだけ名前変更を許す
+    puts "newname = #{newname}"
     if newname !~ /!!$/ then
       redirect_to :action => 'show', :shelfname => shelf.name
       return
