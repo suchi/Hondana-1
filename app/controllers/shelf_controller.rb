@@ -326,6 +326,7 @@ class ShelfController < ApplicationController
   def setname
     shelf = getshelf
     newname = params[:shelf][:name]
+    challenge = params[:challenge]
     response = params[:response]
     ansmd5 = params[:ansmd5]
     enctime = params[:enctime]
@@ -354,7 +355,7 @@ class ShelfController < ApplicationController
       return
     end
     #
-    # 常識サーバからは、タイムスタンプを暗号化したものが返る
+    # 常識サーバからは、問題を暗号化したものも返る
     # これを公開鍵で復号できればOK
     #
     require 'openssl'
@@ -364,14 +365,13 @@ class ShelfController < ApplicationController
     File.open(Rails.root.join("config","id_rsa_pub").to_s) do |f|
       public_key = OpenSSL::PKey::RSA.new(f)
     end
-    t = 0
+    ss = ''
     begin
       ss = Base64.decode64(enctime)
-      ss = public_key.public_decrypt(ss, mode = OpenSSL::PKey::RSA::PKCS1_PADDING)
-      t = Time.at(ss.to_i)
+      ss = public_key.public_decrypt(ss, mode = OpenSSL::PKey::RSA::PKCS1_PADDING).force_encoding('utf-8')
     rescue
     end
-    if (Time.now - t).to_i > 60
+    if ss != challenge
       redirect_to :action => 'show', :shelfname => shelf.name
       return
     end

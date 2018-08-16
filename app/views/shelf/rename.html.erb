@@ -25,6 +25,7 @@
         <%= text_field 'shelf', 'name', :placeholder => '新しい本棚名', :size => 30 %>
         <%= text_field_tag 'response', '', :placeholder => '回答', :size => 7 %>
 	<%= submit_tag "本棚名変更/消去" %>
+        <%= hidden_field_tag 'challenge', quiz %>
         <%= hidden_field_tag 'ansmd5', ansmd5 %>
         <%= hidden_field_tag 'enctime', enctime %>
       <% end %>
