@@ -61,13 +61,14 @@ class BookshelfController < ApplicationController
     File.open(Rails.root.join("config","id_rsa_pub").to_s) do |f|
       public_key = OpenSSL::PKey::RSA.new(f)
     end
-    ss = ''
+    ss = " \t0"
     begin
       ss = Base64.decode64(enctime)
       ss = public_key.public_decrypt(ss, mode = OpenSSL::PKey::RSA::PKCS1_PADDING).force_encoding('utf-8')
     rescue
     end
-    if ss != challenge
+    (qq, t) = ss.split(/\t/)
+    if qq != challenge || Time.now - Time.at(t.to_i) > 30
       redirect_to :action => 'list'
       return
     end
