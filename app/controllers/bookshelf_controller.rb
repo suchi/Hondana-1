@@ -45,7 +45,6 @@ class BookshelfController < ApplicationController
     #
     # 回答が正しいかチェック
     #
-    require "digest/md5"
     if Digest::MD5.hexdigest(response) != ansmd5 then
       redirect_to :action => 'list'
       return
@@ -54,9 +53,6 @@ class BookshelfController < ApplicationController
     # 常識サーバからは、問題を暗号化したものも返る
     # これを公開鍵で復号できればOK
     #
-    require 'openssl'
-    require 'base64'
-    
     public_key = nil
     File.open(Rails.root.join("config","id_rsa_pub").to_s) do |f|
       public_key = OpenSSL::PKey::RSA.new(f)
