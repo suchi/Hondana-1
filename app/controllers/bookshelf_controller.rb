@@ -40,28 +40,54 @@ class BookshelfController < ApplicationController
     challenge = params[:challenge]
     response = params[:response]
     ansmd5 = params[:ansmd5]
+    enctime = params[:enctime]
 
+    #
+    # 回答が正しいかチェック
+    #
     require "digest/md5"
-    #if Math.sqrt(challenge.to_i).floor != response.to_i then # 平方根認証
     if Digest::MD5.hexdigest(response) != ansmd5 then
       redirect_to :action => 'list'
-    else
-      shelf = Shelf.where(name: shelfname)[0]
-      if shelf.nil? then
-        shelf = Shelf.new
-        shelf.name = shelfname
-        shelf.description = ''
-        shelf.url = ''
-        shelf.affiliateid = ''
-        shelf.theme = ''
-        shelf.themeurl = ''
-        shelf.listtype = 'image'
-        shelf.sorttype = 'recent'
-        shelf.modtime = Time.now
-        shelf.save
-      end
-      redirect_to :controller => 'shelf', :action => 'show', :shelfname => shelfname
+      return
     end
+    #
+    # 常識サーバからは、タイムスタンプを暗号化したものが返る
+    # これを公開鍵で復号できればOK
+    #
+    require 'openssl'
+    require 'base64'
+    
+    public_key = nil
+    File.open(Rails.root.join("config","id_rsa_pub").to_s) do |f|
+      public_key = OpenSSL::PKey::RSA.new(f)
+    end
+    t = 0
+    begin
+      ss = Base64.decode64(enctime)
+      ss = public_key.public_decrypt(ss, mode = OpenSSL::PKey::RSA::PKCS1_PADDING)
+      t = Time.at(ss.to_i)
+    rescue
+    end
+    if (Time.now - t).to_i > 60
+      redirect_to :action => 'list'
+      return
+    end
+
+    shelf = Shelf.where(name: shelfname)[0]
+    if shelf.nil? then
+      shelf = Shelf.new
+      shelf.name = shelfname
+      shelf.description = ''
+      shelf.url = ''
+      shelf.affiliateid = ''
+      shelf.theme = ''
+      shelf.themeurl = ''
+      shelf.listtype = 'image'
+      shelf.sorttype = 'recent'
+      shelf.modtime = Time.now
+      shelf.save
+    end
+    redirect_to :controller => 'shelf', :action => 'show', :shelfname => shelfname
   end
 
   def atom

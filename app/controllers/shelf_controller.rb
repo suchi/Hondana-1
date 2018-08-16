@@ -328,26 +328,50 @@ class ShelfController < ApplicationController
     newname = params[:shelf][:name]
     response = params[:response]
     ansmd5 = params[:ansmd5]
+    enctime = params[:enctime]
 
     puts "AUTH_TOKEN = #{params[:authenticity_token]}"
     puts "VERIFIED = #{verified_request?}"
     if !verified_request? # これは必要??
-      # redirect_to :controller => 'bookshelf', :action => 'list'
       redirect_to :action => 'show', :shelfname => shelf.name
       return
     end
 
-    # spam対策のため、!! を最後につけたときだけ名前変更を許す
-    puts "newname = #{newname}"
-    if newname !~ /!!$/ then
-      redirect_to :action => 'show', :shelfname => shelf.name
-      return
-    end
-    newname.sub!(/!!$/,'')
+    # # spam対策のため、!! を最後につけたときだけ名前変更を許す
+    # puts "newname = #{newname}"
+    # if newname !~ /!!$/ then
+    #   redirect_to :action => 'show', :shelfname => shelf.name
+    #   return
+    # end
+    # newname.sub!(/!!$/,'')
 
+    #
+    # 回答が正しいかチェック
+    #
     require "digest/md5"
     if Digest::MD5.hexdigest(response) != ansmd5 then
-      # redirect_to :controller => 'bookshelf', :action => 'list'
+      redirect_to :action => 'show', :shelfname => shelf.name
+      return
+    end
+    #
+    # 常識サーバからは、タイムスタンプを暗号化したものが返る
+    # これを公開鍵で復号できればOK
+    #
+    require 'openssl'
+    require 'base64'
+    
+    public_key = nil
+    File.open(Rails.root.join("config","id_rsa_pub").to_s) do |f|
+      public_key = OpenSSL::PKey::RSA.new(f)
+    end
+    t = 0
+    begin
+      ss = Base64.decode64(enctime)
+      ss = public_key.public_decrypt(ss, mode = OpenSSL::PKey::RSA::PKCS1_PADDING)
+      t = Time.at(ss.to_i)
+    rescue
+    end
+    if (Time.now - t).to_i > 60
       redirect_to :action => 'show', :shelfname => shelf.name
       return
     end
@@ -377,7 +401,7 @@ class ShelfController < ApplicationController
 
     shelf.name = newname # 本棚名変更!!
     shelf.modtime = Time.now
-    shelf.save # 本棚名変更を有効に戻す 2018/8/11
+    shelf.save # 変更した名前をセーブ
 
     if newname =~ /_deleted/ then
       redirect_to :controller => 'bookshelf', :action => 'list'

@@ -14,9 +14,9 @@ def get_joushiki()
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     req = Net::HTTP::Get.new(uri.path)
     res = http.request(req)
-    return ["", ""] unless res
+    return ["", "", ""] unless res
     JSON.parse(res.body)
   rescue
-    return ["", ""]
+    return ["", "", ""]
   end
 end

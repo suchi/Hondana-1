@@ -73,12 +73,13 @@
 		    本棚を作成したい方は masui@pitecan.com にご連絡下さい。
 		      -->
 		    <% require 'joushiki' %>
-		    <% (quiz, ansmd5) = get_joushiki() %>
+		    <% (quiz, ansmd5, enctime) = get_joushiki() %>
 		    本棚の名前と、「<%= quiz %>」 の■に入る文字を入力してから「作成」ボタンを押すと本棚ができます。
                     <%= text_field_tag 'shelfname', '', :placeholder => '本棚名', :size => 12 %>
                     <%= text_field_tag 'response', '', :placeholder => '回答', :size => 7 %>
                     <%= hidden_field_tag 'challenge', quiz %>
                     <%= hidden_field_tag 'ansmd5', ansmd5 %>
+		    <%= hidden_field_tag 'enctime', enctime %>
 		    <%= submit_tag '作成' %>
                   <% end %>
                   <%= Shelf.count %>本棚　<%= Book.count %>冊　<%= link_to '更新順本棚一覧', :controller => 'bookshelf', :action => 'alllist' %>
