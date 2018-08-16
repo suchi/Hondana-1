@@ -38,11 +38,12 @@
       <p></p>
 
       <% require 'joushiki' %>
-      <% (quiz, ansmd5) = get_joushiki() %>
+      <% (quiz, ansmd5, enctime) = get_joushiki() %>
       「<%= quiz %>」 の■に入る文字を入力してから「変更」ボタンを押して下さい。
       <%= text_field_tag 'response', '', :placeholder => '回答', :size => 7 %>
       <%= hidden_field_tag 'challenge', quiz %>
       <%= hidden_field_tag 'ansmd5', ansmd5 %>
+      <%= hidden_field_tag 'enctime', enctime %>
 
       <%= submit_tag "　変更　" %>
       <% end %>

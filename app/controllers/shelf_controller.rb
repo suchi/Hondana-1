@@ -183,11 +183,33 @@ class ShelfController < ApplicationController
     shelf.affiliateid = affiliateid
     shelf.use_iqauth = (params[:shelf][:use_iqauth].to_s == '1' ? '1' : '0')
 
+    challenge = params[:challenge]
     response = params[:response]
     ansmd5 = params[:ansmd5]
+    enctime = params[:enctime]
     
     require "digest/md5"
     if Digest::MD5.hexdigest(response) != ansmd5 then
+      redirect_to :action => 'profile_edit'
+      return
+    end
+    #
+    # 常識サーバからは、問題を暗号化したものも返る
+    # これを公開鍵で復号できればOK
+    #
+    public_key = nil
+    File.open(Rails.root.join("config","id_rsa_pub").to_s) do |f|
+      public_key = OpenSSL::PKey::RSA.new(f)
+    end
+    qq = ""
+    t = 0
+    begin
+      ss = Base64.decode64(enctime)
+      ss = public_key.public_decrypt(ss, mode = OpenSSL::PKey::RSA::PKCS1_PADDING).force_encoding('utf-8')
+      (qq, t) = ss.split(/\t/)
+    rescue
+    end
+    if qq != challenge || Time.now - Time.at(t.to_i) > 30
       redirect_to :action => 'profile_edit'
       return
     end
