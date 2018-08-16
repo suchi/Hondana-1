@@ -169,6 +169,7 @@ class ShelfController < ApplicationController
   def profile_write
     shelf = getshelf
 
+    puts "---profile_write---"
     puts "AUTH_TOKEN = #{params[:authenticity_token]}"
     puts "VERIFIED = #{verified_request?}"
     
