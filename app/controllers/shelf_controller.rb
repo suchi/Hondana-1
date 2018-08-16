@@ -352,7 +352,7 @@ class ShelfController < ApplicationController
       return
     end
 
-    return # SPAM対策するときはここでリターンしてしまう
+    # return # SPAM対策するときはここでリターンしてしまう
 
     puts "newname = #{newname}"
     if newname == '' then
