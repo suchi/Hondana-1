@@ -179,7 +179,16 @@ class ShelfController < ApplicationController
     shelf.affiliateid = affiliateid
     shelf.use_iqauth = (params[:shelf][:use_iqauth].to_s == '1' ? '1' : '0')
 
-    # shelf.save # 編集を許さない
+    response = params[:response]
+    ansmd5 = params[:ansmd5]
+    
+    require "digest/md5"
+    if Digest::MD5.hexdigest(response) != ansmd5 then
+      redirect_to :action => 'profile_edit'
+      return
+    end
+    
+    shelf.save # 編集を許さないときはコメントアウト
 
     #if description !~ /href=/i then
     #  # 単純なタグだけ許す細工
