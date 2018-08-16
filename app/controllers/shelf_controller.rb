@@ -355,6 +355,9 @@ class ShelfController < ApplicationController
 
     puts "AUTH_TOKEN = #{params[:authenticity_token]}"
     puts "VERIFIED = #{verified_request?}"
+    puts "challenge = #{challenge}"
+    puts "response = #{response}"
+    puts "enctime = #{enctime}"
     if !verified_request? # これは必要??
       redirect_to :action => 'show', :shelfname => shelf.name
       return
