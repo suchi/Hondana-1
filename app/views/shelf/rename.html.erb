@@ -16,7 +16,7 @@
           <br/><font color='red'><%= params[:error] %></font><br/>
         <% end %>
 	<% require 'joushiki' %>
-	<% quiz = get_joushiki() %>
+	<% (quiz, enc) = get_joushiki() %>
 	新しい本棚名と、「<%= quiz %>」 の■に入る文字を入力して「本棚名変更/消去」ボタンを押してください。<br/>
 	<!--
         新しい本棚名を入力してボタンを押してください。<br/>
@@ -26,6 +26,7 @@
         <%= text_field_tag 'response', '', :placeholder => '回答', :size => 7 %>
 	<%= submit_tag "本棚名変更/消去" %>
         <%= hidden_field_tag 'challenge', quiz %>
+        <%= hidden_field_tag 'enc', enc %>
       <% end %>
     </div>
     <div class="shelf_h"><%= image_tag "/images/fms.gif", :class => "fms" %></div>

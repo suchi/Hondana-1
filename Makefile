@@ -15,3 +15,6 @@ stop:
 	heroku ps:scale web=0 -a hondana-heroku
 start:
 	heroku ps:scale web=1 -a hondana-heroku
+
+logs:
+	heroku logs -t -a hondana-heroku
