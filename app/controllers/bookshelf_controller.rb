@@ -39,32 +39,37 @@ class BookshelfController < ApplicationController
     shelfname = params[:shelfname]
     challenge = params[:challenge]
     response = params[:response]
-    ansmd5 = params[:ansmd5]
-    enctime = params[:enctime]
 
-    #
-    # 回答が正しいかチェック
-    #
-    if Digest::MD5.hexdigest(response) != ansmd5 then
-      redirect_to :action => 'list'
-      return
-    end
-    #
-    # 常識サーバからは、問題を暗号化したものも返る
-    # これを公開鍵で復号できればOK
-    #
-    public_key = nil
-    File.open(Rails.root.join("config","id_rsa_pub").to_s) do |f|
-      public_key = OpenSSL::PKey::RSA.new(f)
-    end
-    ss = " \t0"
-    begin
-      ss = Base64.decode64(enctime)
-      ss = public_key.public_decrypt(ss, mode = OpenSSL::PKey::RSA::PKCS1_PADDING).force_encoding('utf-8')
-    rescue
-    end
-    (qq, t) = ss.split(/\t/)
-    if qq != challenge || Time.now - Time.at(t.to_i) > 30
+    #    #
+    #    # 回答が正しいかチェック
+    #    #
+    #    if Digest::MD5.hexdigest(response) != ansmd5 then
+    #      redirect_to :action => 'list'
+    #      return
+    #    end
+    #    #
+    #    # 常識サーバからは、問題を暗号化したものも返る
+    #    # これを公開鍵で復号できればOK
+    #    #
+    #    public_key = nil
+    #    File.open(Rails.root.join("config","id_rsa_pub").to_s) do |f|
+    #      public_key = OpenSSL::PKey::RSA.new(f)
+    #    end
+    #    ss = " \t0"
+    #    begin
+    #      ss = Base64.decode64(enctime)
+    #      ss = public_key.public_decrypt(ss, mode = OpenSSL::PKey::RSA::PKCS1_PADDING).force_encoding('utf-8')
+    #    rescue
+    #    end
+    #    (qq, t) = ss.split(/\t/)
+    #    if qq != challenge || Time.now - Time.at(t.to_i) > 30
+    #      redirect_to :action => 'list'
+    #      return
+    #    end
+
+    puts "challenge=#{challenge}, response=#{response}"
+
+    unless check_joushiki(challenge,response)
       redirect_to :action => 'list'
       return
     end
