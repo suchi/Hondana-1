@@ -378,6 +378,7 @@ class ShelfController < ApplicationController
 
     puts "AUTH_TOKEN = #{params[:authenticity_token]}"
     puts "VERIFIED = #{verified_request?}"
+    puts "shelf = #{shelf.name}"
     puts "challenge = #{challenge}"
     puts "response = #{response}"
     if !verified_request? # これは必要??
