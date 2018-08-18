@@ -74,26 +74,26 @@ class BookshelfController < ApplicationController
       redirect_to :action => 'list'
       return
     end
-    #
-    # 常識サーバからは、問題を暗号化したものも返る
-    # これを公開鍵で復号できればOK
-    #
-    public_key = nil
-    File.open(Rails.root.join("config","id_rsa_pub").to_s) do |f|
-      public_key = OpenSSL::PKey::RSA.new(f)
-    end
-    qq = ""
-    t = 0
-    begin
-      ss = Base64.decode64(enc)
-      ss = public_key.public_decrypt(ss, mode = OpenSSL::PKey::RSA::PKCS1_PADDING).force_encoding('utf-8')
-      (qq, t) = ss.split(/\t/)
-    rescue
-    end
-    if qq != challenge[0..10] || Time.now - Time.at(t.to_i) > 30
-      redirect_to :action => 'list'
-      return
-    end
+    #    #
+    #    # 常識サーバからは、問題を暗号化したものも返る
+    #    # これを公開鍵で復号できればOK
+    #    #
+    #    public_key = nil
+    #    File.open(Rails.root.join("config","id_rsa_pub").to_s) do |f|
+    #      public_key = OpenSSL::PKey::RSA.new(f)
+    #    end
+    #    qq = ""
+    #    t = 0
+    #    begin
+    #      ss = Base64.decode64(enc)
+    #      ss = public_key.public_decrypt(ss, mode = OpenSSL::PKey::RSA::PKCS1_PADDING).force_encoding('utf-8')
+    #      (qq, t) = ss.split(/\t/)
+    #    rescue
+    #    end
+    #    if qq != challenge[0..10] || Time.now - Time.at(t.to_i) > 30
+    #      redirect_to :action => 'list'
+    #      return
+    #    end
 
     shelf = Shelf.where(name: shelfname)[0]
     if shelf.nil? then
