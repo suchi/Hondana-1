@@ -185,7 +185,6 @@ class ShelfController < ApplicationController
 
     challenge = params[:challenge]
     response = params[:response]
-    enc = params[:enc]
     
     #    require "digest/md5"
     #    if Digest::MD5.hexdigest(response) != ansmd5 then
