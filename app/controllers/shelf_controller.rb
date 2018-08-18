@@ -233,7 +233,7 @@ class ShelfController < ApplicationController
       (qq, t) = ss.split(/\t/)
     rescue
     end
-    if qq != challenge || Time.now - Time.at(t.to_i) > 30
+    if qq != challenge[0..10] || Time.now - Time.at(t.to_i) > 30
       redirect_to :action => 'profile_edit'
       return
     end
@@ -442,7 +442,7 @@ class ShelfController < ApplicationController
       (qq, t) = ss.split(/\t/)
     rescue
     end
-    if qq != challenge || Time.now - Time.at(t.to_i) > 30
+    if qq != challenge[0...10] || Time.now - Time.at(t.to_i) > 30
       redirect_to :action => 'show', :shelfname => shelf.name
       return
     end
