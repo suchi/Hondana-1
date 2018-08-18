@@ -38,6 +38,7 @@ end
 def check_joushiki(q,a)
   url = "http://joushiki.com/"
   puts "check_joushiki('#{q}','#{a}')"
+  return false if q.to_s == '' || a.to_s == ''
   begin
     uri = URI.parse(URI.escape(url)) # 何故かescape必要?
     http = Net::HTTP.new(uri.host, uri.port)
