@@ -39,7 +39,6 @@ class BookshelfController < ApplicationController
     shelfname = params[:shelfname]
     challenge = params[:challenge]
     response = params[:response]
-    enc = params[:enc]
 
     #    #
     #    # 回答が正しいかチェック
@@ -68,7 +67,7 @@ class BookshelfController < ApplicationController
     #      return
     #    end
 
-    puts "challenge=#{challenge}, response=#{response}, enc=#{enc}"
+    puts "challenge=#{challenge}, response=#{response}"
 
     unless check_joushiki(challenge,response)
       redirect_to :action => 'list'
@@ -107,7 +106,7 @@ class BookshelfController < ApplicationController
       shelf.listtype = 'image'
       shelf.sorttype = 'recent'
       shelf.modtime = Time.now
-      shelf.save
+      # shelf.save
     end
     redirect_to :controller => 'shelf', :action => 'show', :shelfname => shelfname
   end
