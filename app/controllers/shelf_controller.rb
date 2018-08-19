@@ -63,6 +63,8 @@ class ShelfController < ApplicationController
     shelf = getshelf
     book = getbook
     entry = getentry(shelf,book)
+
+    puts "REMOTE_IP = #{request.remote_ip}"
     
     entry.score = params[:entry][:score]
     entry.categories = params[:entry][:categories].sub(/\s*$/,'')
