@@ -64,7 +64,7 @@ class ShelfController < ApplicationController
     book = getbook
     entry = getentry(shelf,book)
 
-    puts "---wwrite---"
+    puts "---write---"
     puts "REMOTE_IP = #{request.remote_ip}"
     
     entry.score = params[:entry][:score]

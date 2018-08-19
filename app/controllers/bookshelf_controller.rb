@@ -30,6 +30,9 @@ class BookshelfController < ApplicationController
   end
   
   def create
+    puts "Create"
+    puts "verified = #{verified_request?}"
+    
     # redirect_to :action => 'list' # 本棚作成を許さない場合
     if !verified_request? # これは必要??
       redirect_to :controller => 'bookshelf', :action => 'list'
@@ -40,6 +43,9 @@ class BookshelfController < ApplicationController
     challenge = params[:challenge]
     response = params[:response]
 
+    puts "shelf = #{shelfname}"
+    puts "challenge = #{challenge}"
+    puts "response = #{response}"
     #    #
     #    # 回答が正しいかチェック
     #    #
