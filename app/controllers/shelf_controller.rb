@@ -64,6 +64,7 @@ class ShelfController < ApplicationController
     book = getbook
     entry = getentry(shelf,book)
 
+    puts "---wwrite---"
     puts "REMOTE_IP = #{request.remote_ip}"
     
     entry.score = params[:entry][:score]
@@ -111,6 +112,9 @@ class ShelfController < ApplicationController
       return
     end
 
+    puts "---newbook---"
+    puts "REMOTE_IP = #{request.remote_ip}"
+    
     amazon = MyAmazon.new
     amazon.get_data(isbns.join(","))
     isbns.each { |isbn|
