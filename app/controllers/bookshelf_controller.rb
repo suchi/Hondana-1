@@ -106,7 +106,7 @@ class BookshelfController < ApplicationController
       shelf.listtype = 'image'
       shelf.sorttype = 'recent'
       shelf.modtime = Time.now
-      # shelf.save
+      shelf.save
     end
     redirect_to :controller => 'shelf', :action => 'show', :shelfname => shelfname
   end
