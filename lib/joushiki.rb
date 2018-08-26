@@ -39,11 +39,13 @@ def check_joushiki(q,a)
   url = "http://joushiki.com/"
   puts "check_joushiki('#{q}','#{a}')"
   return false if q.to_s == '' || a.to_s == ''
+  text = q.sub(/■/,a)
   begin
     uri = URI.parse(URI.escape(url)) # 何故かescape必要?
     http = Net::HTTP.new(uri.host, uri.port)
-    req = Net::HTTP::Get.new("#{uri.path}?q=#{q}&a=#{a}")
-    puts "uri=#{uri.path}?q=#{q}&a=#{a}"
+    #req = Net::HTTP::Get.new("#{uri.path}?q=#{q}&a=#{a}")
+    req = Net::HTTP::Get.new("#{uri.path}#{text}")
+    puts "uri=#{uri.path}#{text}"
     res = http.request(req)
     puts "BODY = #{res.body}"
     return false unless res

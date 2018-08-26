@@ -217,7 +217,7 @@ class ShelfController < ApplicationController
     #      redirect_to :action => 'profile_edit'
     #      return
     #    end
-    
+
     unless check_joushiki(challenge,response)
       redirect_to :action => 'profile_edit'
       return

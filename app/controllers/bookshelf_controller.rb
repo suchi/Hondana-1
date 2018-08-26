@@ -31,7 +31,7 @@ class BookshelfController < ApplicationController
   
   def create
     puts "Create"
-    puts "verified = #{verified_request?}"
+    puts "verified = #{verified_request?}" # CSRFでここまで来てないのかな?
     
     # redirect_to :action => 'list' # 本棚作成を許さない場合
     if !verified_request? # これは必要??
