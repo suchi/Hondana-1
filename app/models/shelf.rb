@@ -14,7 +14,7 @@ class Shelf < ApplicationRecord
 
   def countbook_comment
     Entry.where(shelf_id:  id).find_all { |entry|
-      entry.comment.length > 0
+      entry.comment.to_s.length > 0
     }.length
   end
 

@@ -139,6 +139,7 @@ class ShelfController < ApplicationController
         entry.modtime = Time.now
         entry.clicktime = Time.now
         # entry.comment = request.remote_ip.to_s # IP記録
+        entry.comment = ""
         entry.score = ''
         entry.categories = ''
         entry.save
