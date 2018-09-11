@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   # # ファイルの中のパスワードとクイズを変換してをDBにコピー (旧本棚からの移行時のみ利用)
   # get 'convert_db' => 'shelf#convert_db'
 
+  # ランダム
+  get 'random' => 'bookshelf#randombook'
+
   # 各本棚トップ
   # app/controllers/shelf_controller.rb
   # app/views/shelf/show.html.erb
