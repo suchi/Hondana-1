@@ -31,22 +31,7 @@ class BookshelfController < ApplicationController
 
   def randombook
     entry = Entry.order("random()").limit(1)[0]
-    # p entry
-    # p entry.shelf
-    # p entry.book
-    
-    # shelf = Shelf.where(id: entry['shelf_id'])
-    # book = Book.where(id: entry['book_id'])
-    # shelf = entry.shelf # xxxxx
-    # book = entry.book # xxxx
-
-    # redirect_to :controller => 'shelf', :action => 'edit', :shelfname => shelf.name, :isbn => entry.book.isbn
-    
-    # render :controller => 'shelf', :action => 'edit', locals: { shelf: shelf, book: book, entry: entry }
-    
     redirect_to :controller => 'shelf', :action => 'edit', :shelfname => entry.shelf.name, :isbn => entry.book.isbn
-    
-    # redirect_to :controller => 'shelf', :action => 'edit', locals: { shelf: shelf.name, book: book.isbn }
   end
   
   def create
