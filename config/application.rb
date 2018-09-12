@@ -17,5 +17,9 @@ module Hondana
 
 
     config.middleware.use Rack::Attack
+
+    config.action_dispatch.default_headers["X-Frame-Options"] = "Allow-From https://gyatv.com"
   end
 end
+
+
