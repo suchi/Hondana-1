@@ -88,7 +88,7 @@ function showquiz(){
             <td></td>
             <td>
               <% book.authors.to_s.split(/,\s*/).each { |author| %>
-                <%= link_to author, :controller => 'bookshelf', :action => 'search', :q => author %>
+                <%= link_to author, :controller => 'bookshelf', :action => 'search', :query => author %>
               <% } %>
               <br/>
               <%= book.publisher %>
